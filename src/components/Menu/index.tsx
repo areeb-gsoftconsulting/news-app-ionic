@@ -2,14 +2,25 @@ import React from "react";
 import {
   IonButton,
   IonContent,
+  IonFooter,
   IonHeader,
+  IonIcon,
+  IonLabel,
   IonMenu,
   IonMenuToggle,
   IonPage,
+  IonRouterOutlet,
+  IonTabBar,
+  IonTabButton,
+  IonTabs,
   IonTitle,
   IonToolbar,
 } from "@ionic/react";
 import Header from "../Header";
+import CardsContainer from "../CardsContainer";
+import { playCircle, radio, library, search } from "ionicons/icons";
+import { Redirect, Route } from "react-router";
+import BottomTabs from "../BottomTabs";
 function MenuComp() {
   return (
     <>
@@ -28,8 +39,14 @@ function MenuComp() {
       <IonPage id="main-content">
         <Header />
         <IonContent fullscreen>
-          <IonTitle size="large">Blank</IonTitle>
+          <CardsContainer />
         </IonContent>
+        {/* footer */}
+        <IonFooter translucent>
+          <IonToolbar>
+            <BottomTabs />
+          </IonToolbar>
+        </IonFooter>
       </IonPage>
     </>
   );
