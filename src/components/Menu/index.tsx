@@ -21,21 +21,11 @@ import CardsContainer from "../CardsContainer";
 import { playCircle, radio, library, search } from "ionicons/icons";
 import { Redirect, Route } from "react-router";
 import BottomTabs from "../BottomTabs";
+import MenuComponent from "../MenuComponent";
 function MenuComp() {
   return (
     <>
-      <IonMenu contentId="main-content">
-        <IonHeader>
-          <IonToolbar>
-            <IonTitle>Menu Content</IonTitle>
-          </IonToolbar>
-        </IonHeader>
-        <IonContent className="ion-padding">
-          <IonMenuToggle>
-            <IonButton>Click to close the menu</IonButton>
-          </IonMenuToggle>
-        </IonContent>
-      </IonMenu>
+      <MenuComponent />
       <IonPage id="main-content">
         <Header />
         <IonContent fullscreen>
