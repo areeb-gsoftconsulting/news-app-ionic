@@ -1,0 +1,10 @@
+.headerlogo {
+  height: 40px;
+  width: auto;
+}
+.toolbar {
+  padding: 15px 15px 15px 15px !important;
+}
+/* .ion-toolbar:first-of-type {
+  padding: 15px 15px 15px 15px !important;
+} */
