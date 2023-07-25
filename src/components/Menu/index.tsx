@@ -9,6 +9,7 @@ import {
   IonTitle,
   IonToolbar,
 } from "@ionic/react";
+import Header from "../Header";
 function MenuComp() {
   return (
     <>
@@ -24,6 +25,12 @@ function MenuComp() {
           </IonMenuToggle>
         </IonContent>
       </IonMenu>
+      <IonPage id="main-content">
+        <Header />
+        <IonContent fullscreen>
+          <IonTitle size="large">Blank</IonTitle>
+        </IonContent>
+      </IonPage>
     </>
   );
 }

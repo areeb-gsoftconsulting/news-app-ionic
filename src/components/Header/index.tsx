@@ -20,7 +20,7 @@ interface ContainerProps {}
 
 const Header: React.FC<ContainerProps> = () => {
   return (
-    <IonHeader className="ion-no-border">
+    <IonHeader>
       <IonToolbar class={styles.toolbar} mode="ios">
         <IonButtons slot="start">
           <IonMenuButton autoHide={false}></IonMenuButton>
