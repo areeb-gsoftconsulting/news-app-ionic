@@ -14,6 +14,7 @@ import {
 import styles from "./header.module.css";
 import { refreshSharp } from "ionicons/icons";
 import logo from "../../images/HeaderIcon.png";
+import dunyaLogo from "../../images/dunya.jpeg";
 
 interface ContainerProps {}
 
@@ -29,6 +30,7 @@ const Header: React.FC<ContainerProps> = () => {
           <IonIcon icon={refreshSharp}></IonIcon>
         </IonButtons>
       </IonToolbar>
+      {/* /categories */}
       <IonToolbar>
         <IonSegment scrollable value="all">
           <IonSegmentButton value="all">
@@ -42,6 +44,35 @@ const Header: React.FC<ContainerProps> = () => {
           </IonSegmentButton>
           <IonSegmentButton value="favoites">
             <IonLabel>Favorites</IonLabel>
+          </IonSegmentButton>
+        </IonSegment>
+      </IonToolbar>
+      {/* /channels */}
+      <IonToolbar>
+        <IonSegment scrollable value="all">
+          <IonSegmentButton value="faoites">
+            <IonImg className={styles.channelLogos} src={dunyaLogo} />
+          </IonSegmentButton>
+          <IonSegmentButton value="fa3voites">
+            <IonImg className={styles.channelLogos} src={dunyaLogo} />
+          </IonSegmentButton>
+          <IonSegmentButton value="fav4oites">
+            <IonImg className={styles.channelLogos} src={dunyaLogo} />
+          </IonSegmentButton>
+          <IonSegmentButton value="favo5ites">
+            <IonImg className={styles.channelLogos} src={dunyaLogo} />
+          </IonSegmentButton>
+          <IonSegmentButton value="fav56oites">
+            <IonImg className={styles.channelLogos} src={dunyaLogo} />
+          </IonSegmentButton>
+          <IonSegmentButton value="f55avoites">
+            <IonImg className={styles.channelLogos} src={dunyaLogo} />
+          </IonSegmentButton>
+          <IonSegmentButton value="favo6ites">
+            <IonImg className={styles.channelLogos} src={dunyaLogo} />
+          </IonSegmentButton>
+          <IonSegmentButton value="favo77ites">
+            <IonImg className={styles.channelLogos} src={dunyaLogo} />
           </IonSegmentButton>
         </IonSegment>
       </IonToolbar>

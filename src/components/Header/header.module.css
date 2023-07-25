@@ -5,6 +5,7 @@
 .toolbar {
   padding: 15px 15px 15px 15px !important;
 }
-/* .ion-toolbar:first-of-type {
-  padding: 15px 15px 15px 15px !important;
-} */
+.channelLogos {
+  height: 50px;
+  width: 50px;
+}
