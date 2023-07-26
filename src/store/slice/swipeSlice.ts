@@ -4,7 +4,7 @@
  */
 import { swipeState } from "../../models/reducers/swipe";
 import { createSlice } from "@reduxjs/toolkit";
-import analytics from "@react-native-firebase/analytics";
+// import analytics from "@react-native-firebase/analytics";
 
 const initialState: swipeState = {
   swipeCount: 0,
@@ -17,18 +17,12 @@ const swipeStateSlice = createSlice({
   initialState,
   reducers: {
     swipeCount: (state: swipeState) => {
-      analytics().logEvent("on_swipe", {
-        value: "true",
-      });
       return {
         ...state,
         swipeCount: state.swipeCount == 3 ? 0 : state.swipeCount + 1,
       };
     },
     onExpandDetails: (state: swipeState) => {
-      analytics().logEvent("expand_news", {
-        value: "true",
-      });
       return {
         ...state,
         onEndReachAd: true,
@@ -37,9 +31,6 @@ const swipeStateSlice = createSlice({
       };
     },
     onEndReachAd: (state: swipeState) => {
-      analytics().logEvent("end_reach", {
-        value: "true",
-      });
       return {
         ...state,
         onEndReachAd: true,

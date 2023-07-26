@@ -1,9 +1,9 @@
-import {put, call} from 'redux-saga/effects';
-import registerUser from 'app/services/register';
-import {enableLoading, disableLoading} from 'app/store/slice/loadingSlice';
-import {enableSnackbar} from 'app/store/slice/snackSlice';
-import * as navigationActions from '../actions/navigationActions';
-import {requestAction} from 'app/models/types';
+import { put, call } from "redux-saga/effects";
+import registerUser from "../../services/register";
+import { enableLoading, disableLoading } from "../../store/slice/loadingSlice";
+import { enableSnackbar } from "../../store/slice/snackSlice";
+import * as navigationActions from "../actions/navigationActions";
+import { requestAction } from "../../models/types";
 
 export default function* registerAsync(action: requestAction) {
   yield put(enableLoading({}));
@@ -16,7 +16,7 @@ export default function* registerAsync(action: requestAction) {
     let data = response.message;
     yield put(enableSnackbar(data));
   } else if (response && response.status && response.status == 400) {
-    let data = 'validation Error';
+    let data = "validation Error";
 
     yield put(enableSnackbar(data));
   } else if (response && response.value) {
