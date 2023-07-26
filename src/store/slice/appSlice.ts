@@ -15,6 +15,7 @@ const initialState: appState = {
   onSwipe: 0,
   isRatingDialogVisible: false,
   currentRoute: "Home",
+  selectedTab: "",
 };
 
 const AppState = createSlice({
@@ -72,6 +73,12 @@ const AppState = createSlice({
         currentRoute: action.payload,
       };
     },
+    onSelectTab: (state: any, action) => {
+      return {
+        ...state,
+        selectedTab: action.payload,
+      };
+    },
   },
 });
 
@@ -84,5 +91,6 @@ export const {
   disableRatingDialog,
   onSwipe,
   saveCurrentRoute,
+  onSelectTab,
 } = AppState.actions;
 export default AppState.reducer;

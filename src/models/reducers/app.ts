@@ -8,6 +8,7 @@ export interface appState {
   isRatingDialogVisible: boolean;
   onSwipe: any;
   currentRoute: string;
+  selectedTab: any;
 }
 
 export interface responseAction {

@@ -116,7 +116,7 @@ const CardsContainer: React.FC = ({ news }: any) => {
                           paddingBottom: 0,
                           width: "86%",
                           display: "flex",
-                          justifyContent: "space-evenly",
+                          justifyContent: "space-between",
                         }}
                         // class="ion-justify-content-between ion-align-items-center ion-padding"
                       >

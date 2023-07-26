@@ -40,18 +40,21 @@ function MenuComp() {
   const [news, setNews] = useState(null);
   const [loader, seLoader] = useState(false);
   const channels = useSelector((state: any) => state.app?.channels);
-  console.log({ channels });
+  const selectedTab = useSelector((state: any) => state.app?.selectedTab);
+  console.log({ selectedTab });
   const channelArray = Object.entries(channels);
   const selectedChannel = useSelector(
     (state: any) => state.selectedChannels.channel
   );
-  const [categories, setCategories] = useState(null);
 
   console.log({ selectedChannel });
   useEffect(() => {
     dispatch(getConfigRequest({}));
-    getChannelNews();
   }, []);
+
+  useEffect(() => {
+    getChannelNews();
+  }, [selectedChannel, selectedTab]);
 
   const getChannelNews = async () => {
     seLoader(true);
@@ -60,7 +63,7 @@ function MenuComp() {
     try {
       let response = await getCategoryNews(
         {
-          category: [],
+          category: selectedTab,
           source: selectedChannel.toString(),
         },
         1,

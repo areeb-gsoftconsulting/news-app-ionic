@@ -14,14 +14,19 @@ import {
 import styles from "./header.module.css";
 import { refreshSharp } from "ionicons/icons";
 import logo from "../../images/HeaderIcon.png";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { onSelectTab } from "../../store/slice/appSlice";
 
 interface ContainerProps {}
 
 const Header: React.FC<ContainerProps> = () => {
-  const tabs = useSelector((state: any) => state.app?.tabs);
+  const _tabs = useSelector((state: any) => state.app?.tabs);
+  let tabs =
+    _tabs?.filter((item) => item.index != "LiveTV" && item.index != "Akhbar") ||
+    [];
+  const dispatch = useDispatch();
+  const selectedTab = useSelector((state: any) => state.app?.selectedTab);
 
-  console.log({ tabs });
   return (
     <IonHeader>
       <IonToolbar class={styles.toolbar} mode="ios">
@@ -35,9 +40,16 @@ const Header: React.FC<ContainerProps> = () => {
       </IonToolbar>
       {/* /categories */}
       <IonToolbar>
-        <IonSegment scrollable value={tabs[0]?.key}>
+        <IonSegment
+          scrollable
+          value={selectedTab == "" ? tabs[0]?.key : selectedTab}
+        >
           {tabs.map((data: any, index: any) => (
-            <IonSegmentButton key={index} value={data.key}>
+            <IonSegmentButton
+              onClick={(e: any) => dispatch(onSelectTab(data.index))}
+              key={index}
+              value={data.index}
+            >
               <IonLabel>{data?.title}</IonLabel>
             </IonSegmentButton>
           ))}
