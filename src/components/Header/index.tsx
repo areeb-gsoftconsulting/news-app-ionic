@@ -15,10 +15,14 @@ import styles from "./header.module.css";
 import { refreshSharp } from "ionicons/icons";
 import logo from "../../images/HeaderIcon.png";
 import dunyaLogo from "../../images/dunya.jpeg";
+import { useSelector } from "react-redux";
 
 interface ContainerProps {}
 
 const Header: React.FC<ContainerProps> = () => {
+  const tabs = useSelector((state: any) => state.app?.tabs);
+
+  console.log({ tabs });
   return (
     <IonHeader>
       <IonToolbar class={styles.toolbar} mode="ios">
@@ -33,18 +37,11 @@ const Header: React.FC<ContainerProps> = () => {
       {/* /categories */}
       <IonToolbar>
         <IonSegment scrollable value="all">
-          <IonSegmentButton value="all">
-            <IonLabel>All</IonLabel>
-          </IonSegmentButton>
-          <IonSegmentButton value="favorite">
-            <IonLabel>Favorites</IonLabel>
-          </IonSegmentButton>
-          <IonSegmentButton value="favories">
-            <IonLabel>Favorites</IonLabel>
-          </IonSegmentButton>
-          <IonSegmentButton value="favoites">
-            <IonLabel>Favorites</IonLabel>
-          </IonSegmentButton>
+          {tabs.map((data: any, index: any) => (
+            <IonSegmentButton key={index} value={data.key}>
+              <IonLabel>{data?.title}</IonLabel>
+            </IonSegmentButton>
+          ))}
         </IonSegment>
       </IonToolbar>
       {/* /channels */}

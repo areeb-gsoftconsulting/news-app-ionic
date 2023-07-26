@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import {
   IonButton,
   IonContent,
@@ -22,7 +22,14 @@ import { playCircle, radio, library, search } from "ionicons/icons";
 import { Redirect, Route } from "react-router";
 import BottomTabs from "../BottomTabs";
 import MenuComponent from "../MenuComponent";
+import { useDispatch } from "react-redux";
+import { getConfigRequest } from "../../store/actions/appAction";
 function MenuComp() {
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(getConfigRequest({}));
+  }, []);
+
   return (
     <>
       <MenuComponent />

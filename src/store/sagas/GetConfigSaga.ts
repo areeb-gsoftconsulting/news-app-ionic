@@ -6,8 +6,10 @@ import getConfigs from "../../services/getConfigs";
 // Our worker Saga that logins the user
 export default function* ConfigAsync() {
   try {
+    console.log("gfdsgfgfd");
     yield put(loadingAction.enableLoading({}));
     let response = yield call(getConfigs);
+    console.log("response", response);
 
     if (response) {
       let tempTabIndex: any = [];

@@ -22,6 +22,7 @@ const AppState = createSlice({
   initialState,
   reducers: {
     getConfigResponse: (state: any, action) => {
+      console.log({ state });
       return {
         ...state,
         tabs: action.payload.tabs,
