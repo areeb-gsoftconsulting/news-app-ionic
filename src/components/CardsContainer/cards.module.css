@@ -1,0 +1,40 @@
+.cards {
+  height: 300px;
+}
+.header {
+  font-size: 15px;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  max-height: 3em; /* Adjust the height for two lines (2 * line-height) */
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.shortSummary {
+  font-size: 12px;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  max-height: 3em; /* Adjust the height for two lines (2 * line-height) */
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.image {
+  height: 130px;
+  width: 100%;
+}
+.channelName {
+  font-size: 10px;
+}
+.cardFooter {
+  /* justify-content: space-between !important; */
+  /* border: 2px solid blue; */
+  margin-top: 20px;
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  flex-wrap: nowrap;
+  align-content: center;
+  /* height: 50px; */
+}

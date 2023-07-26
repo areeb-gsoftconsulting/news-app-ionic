@@ -19,6 +19,7 @@ import { saveSharp } from "ionicons/icons";
 import { useSelector } from "react-redux";
 import { reducerState } from "../../models/types";
 import moment from "moment";
+import styles from "./cards.module.css";
 
 const CardsContainer: React.FC = ({ news }: any) => {
   console.log("cards com", news);
@@ -91,34 +92,54 @@ const CardsContainer: React.FC = ({ news }: any) => {
                   sizeLg="4"
                   sizeXl="2"
                 >
-                  <IonCard>
-                    <img alt="Silhouette of mountains" src={data.image} />
+                  <IonCard className={styles.cards}>
+                    <img
+                      alt="Silhouette of mountains"
+                      className={styles.image}
+                      src={data.image}
+                    />
                     <IonCardHeader>
-                      <IonCardTitle>{data.title}</IonCardTitle>
+                      <IonCardTitle className={styles.header}>
+                        {data.title}
+                      </IonCardTitle>
                     </IonCardHeader>
 
-                    <IonCardContent>{data.shortSummary}</IonCardContent>
-                    <IonRow class="ion-justify-content-between">
+                    <IonCardContent className={styles.shortSummary}>
+                      {data.shortSummary}
+                    </IonCardContent>
+                    <IonRow
+                      // class="ion-justify-content-between"
+                      className={styles.cardFooter}
+                    >
                       <IonRow
                         style={{
                           paddingBottom: 0,
+                          width: "86%",
+                          display: "flex",
+                          justifyContent: "space-evenly",
                         }}
-                        class="ion-justify-content-between ion-align-items-center ion-padding"
+                        // class="ion-justify-content-between ion-align-items-center ion-padding"
                       >
-                        <IonAvatar style={{ height: 20, width: 20 }}>
+                        <IonAvatar
+                          style={{ height: 20, width: 20, alignSelf: "center" }}
+                        >
                           <img
                             alt="Silhouette of a person's head"
                             src={channels[data.source]?.image}
                           />
                         </IonAvatar>
-                        <p>{channels[data?.source]?.name}</p>
-                        <p>{moment(data?.updatedAt).fromNow()}</p>
+                        <p className={styles.channelName}>
+                          {channels[data?.source]?.name}
+                        </p>
+                        <p className={styles.channelName}>
+                          {moment(data?.updatedAt).fromNow()}
+                        </p>
                       </IonRow>
                       <IonRow
                         style={{
                           paddingBottom: 0,
                         }}
-                        class="ion-align-items-center ion-padding"
+                        // class="ion-align-items-center ion-padding"
                       >
                         <IonIcon icon={saveSharp} />
                       </IonRow>
