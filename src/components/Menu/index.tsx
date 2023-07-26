@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import {
   IonButton,
   IonContent,
@@ -25,16 +25,46 @@ import { playCircle, radio, library, search } from "ionicons/icons";
 import { Redirect, Route } from "react-router";
 import BottomTabs from "../BottomTabs";
 import MenuComponent from "../MenuComponent";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { getConfigRequest } from "../../store/actions/appAction";
 import styles from "../Header/header.module.css";
 import dunyaLogo from "../../images/dunya.jpeg";
+import getCategoryNews from "../../services/getCategoryNews";
 
 function MenuComp() {
   const dispatch = useDispatch();
+  const [news, setNews] = useState(null);
+  const [loader, seLoader] = useState(false);
+  const channels = useSelector((state: any) => state.app?.channels);
+  console.log({ channels });
+  const channelArray = Object.entries(channels);
+
   useEffect(() => {
     dispatch(getConfigRequest({}));
   }, []);
+
+  const getChannelNews = async () => {
+    seLoader(true);
+    // setPaginationError('');
+    // setPageNumber(2);
+
+    try {
+      let response = await getCategoryNews(
+        {
+          category: categories,
+          source: selectedChannel.toString(),
+        },
+        1,
+        20
+      );
+      if (response && response?.status == true) {
+        setNews(response?.data);
+      }
+      seLoader(false);
+    } catch {
+      seLoader(false);
+    }
+  };
 
   return (
     <>
@@ -45,30 +75,14 @@ function MenuComp() {
           {/* /channels */}
           <IonToolbar>
             <IonSegment scrollable value="all">
-              <IonSegmentButton value="faoites">
-                <IonImg className={styles.channelLogos} src={dunyaLogo} />
-              </IonSegmentButton>
-              <IonSegmentButton value="fa3voites">
-                <IonImg className={styles.channelLogos} src={dunyaLogo} />
-              </IonSegmentButton>
-              <IonSegmentButton value="fav4oites">
-                <IonImg className={styles.channelLogos} src={dunyaLogo} />
-              </IonSegmentButton>
-              <IonSegmentButton value="favo5ites">
-                <IonImg className={styles.channelLogos} src={dunyaLogo} />
-              </IonSegmentButton>
-              <IonSegmentButton value="fav56oites">
-                <IonImg className={styles.channelLogos} src={dunyaLogo} />
-              </IonSegmentButton>
-              <IonSegmentButton value="f55avoites">
-                <IonImg className={styles.channelLogos} src={dunyaLogo} />
-              </IonSegmentButton>
-              <IonSegmentButton value="favo6ites">
-                <IonImg className={styles.channelLogos} src={dunyaLogo} />
-              </IonSegmentButton>
-              <IonSegmentButton value="favo77ites">
-                <IonImg className={styles.channelLogos} src={dunyaLogo} />
-              </IonSegmentButton>
+              {channelArray.map((data: any, index: any) => (
+                <IonSegmentButton value={data[1]?.key}>
+                  <IonImg
+                    className={styles.channelLogos}
+                    src={data[1]?.image}
+                  />
+                </IonSegmentButton>
+              ))}
             </IonSegment>
           </IonToolbar>
           <CardsContainer />
