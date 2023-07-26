@@ -14,7 +14,6 @@ import {
 import styles from "./header.module.css";
 import { refreshSharp } from "ionicons/icons";
 import logo from "../../images/HeaderIcon.png";
-import dunyaLogo from "../../images/dunya.jpeg";
 import { useSelector } from "react-redux";
 
 interface ContainerProps {}
@@ -36,41 +35,12 @@ const Header: React.FC<ContainerProps> = () => {
       </IonToolbar>
       {/* /categories */}
       <IonToolbar>
-        <IonSegment scrollable value="all">
+        <IonSegment scrollable value={tabs[0]?.key}>
           {tabs.map((data: any, index: any) => (
             <IonSegmentButton key={index} value={data.key}>
               <IonLabel>{data?.title}</IonLabel>
             </IonSegmentButton>
           ))}
-        </IonSegment>
-      </IonToolbar>
-      {/* /channels */}
-      <IonToolbar>
-        <IonSegment scrollable value="all">
-          <IonSegmentButton value="faoites">
-            <IonImg className={styles.channelLogos} src={dunyaLogo} />
-          </IonSegmentButton>
-          <IonSegmentButton value="fa3voites">
-            <IonImg className={styles.channelLogos} src={dunyaLogo} />
-          </IonSegmentButton>
-          <IonSegmentButton value="fav4oites">
-            <IonImg className={styles.channelLogos} src={dunyaLogo} />
-          </IonSegmentButton>
-          <IonSegmentButton value="favo5ites">
-            <IonImg className={styles.channelLogos} src={dunyaLogo} />
-          </IonSegmentButton>
-          <IonSegmentButton value="fav56oites">
-            <IonImg className={styles.channelLogos} src={dunyaLogo} />
-          </IonSegmentButton>
-          <IonSegmentButton value="f55avoites">
-            <IonImg className={styles.channelLogos} src={dunyaLogo} />
-          </IonSegmentButton>
-          <IonSegmentButton value="favo6ites">
-            <IonImg className={styles.channelLogos} src={dunyaLogo} />
-          </IonSegmentButton>
-          <IonSegmentButton value="favo77ites">
-            <IonImg className={styles.channelLogos} src={dunyaLogo} />
-          </IonSegmentButton>
         </IonSegment>
       </IonToolbar>
     </IonHeader>
