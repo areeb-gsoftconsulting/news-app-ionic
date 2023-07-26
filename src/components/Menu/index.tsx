@@ -26,10 +26,14 @@ import { Redirect, Route } from "react-router";
 import BottomTabs from "../BottomTabs";
 import MenuComponent from "../MenuComponent";
 import { useDispatch, useSelector } from "react-redux";
-import { getConfigRequest } from "../../store/actions/appAction";
+import {
+  getCategoryNewsRequest,
+  getConfigRequest,
+} from "../../store/actions/appAction";
 import styles from "../Header/header.module.css";
 import dunyaLogo from "../../images/dunya.jpeg";
 import getCategoryNews from "../../services/getCategoryNews";
+import * as selectedChannelAction from "../../store/slice/selectedChannelSlice";
 
 function MenuComp() {
   const dispatch = useDispatch();
@@ -38,20 +42,25 @@ function MenuComp() {
   const channels = useSelector((state: any) => state.app?.channels);
   console.log({ channels });
   const channelArray = Object.entries(channels);
+  const selectedChannel = useSelector(
+    (state: any) => state.selectedChannels.channel
+  );
+  const [categories, setCategories] = useState(null);
 
+  console.log({ selectedChannel });
   useEffect(() => {
     dispatch(getConfigRequest({}));
+    getChannelNews();
   }, []);
 
   const getChannelNews = async () => {
     seLoader(true);
     // setPaginationError('');
     // setPageNumber(2);
-
     try {
       let response = await getCategoryNews(
         {
-          category: categories,
+          category: [],
           source: selectedChannel.toString(),
         },
         1,
@@ -59,11 +68,43 @@ function MenuComp() {
       );
       if (response && response?.status == true) {
         setNews(response?.data);
+        console.log("menu comp", response?.data);
       }
       seLoader(false);
     } catch {
       seLoader(false);
     }
+  };
+
+  const onSelect = (id: any) => {
+    if (selectedChannel.includes(id)) {
+      let tempSeleted = selectedChannel.filter((data: any) => data !== id);
+      dispatch(
+        selectedChannelAction.getSelectedChannels({
+          channel: tempSeleted,
+        })
+      );
+    } else {
+      dispatch(
+        selectedChannelAction.getSelectedChannels({
+          channel: [id, ...selectedChannel],
+        })
+      );
+    }
+  };
+
+  const getAllChannels = () => {
+    dispatch(
+      selectedChannelAction.getSelectedChannels({
+        channel: [],
+      })
+    );
+    dispatch(
+      getCategoryNewsRequest({
+        category: [],
+        source: [],
+      })
+    );
   };
 
   return (
@@ -76,7 +117,10 @@ function MenuComp() {
           <IonToolbar>
             <IonSegment scrollable value="all">
               {channelArray.map((data: any, index: any) => (
-                <IonSegmentButton value={data[1]?.key}>
+                <IonSegmentButton
+                  onClick={() => onSelect(data[1].key)}
+                  value={data[1]?.key}
+                >
                   <IonImg
                     className={styles.channelLogos}
                     src={data[1]?.image}
@@ -85,7 +129,7 @@ function MenuComp() {
               ))}
             </IonSegment>
           </IonToolbar>
-          <CardsContainer />
+          <CardsContainer news={news} />
         </IonContent>
         {/* footer */}
         <IonFooter translucent>
