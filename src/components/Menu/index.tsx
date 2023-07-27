@@ -23,8 +23,7 @@ import {
 } from "@ionic/react";
 import Header from "../Header";
 import CardsContainer from "../CardsContainer";
-import { playCircle, radio, library, search } from "ionicons/icons";
-import { Redirect, Route } from "react-router";
+import { checkmarkCircle } from "ionicons/icons";
 import BottomTabs from "../BottomTabs";
 import MenuComponent from "../MenuComponent";
 import { useDispatch, useSelector } from "react-redux";
@@ -33,7 +32,7 @@ import {
   getConfigRequest,
 } from "../../store/actions/appAction";
 import styles from "../Header/header.module.css";
-import dunyaLogo from "../../images/dunya.jpeg";
+import allLogo from "../../images/Tmam.png";
 import getCategoryNews from "../../services/getCategoryNews";
 import * as selectedChannelAction from "../../store/slice/selectedChannelSlice";
 
@@ -41,10 +40,30 @@ function MenuComp() {
   const dispatch = useDispatch();
   const [news, setNews] = useState(null);
   const [loader, seLoader] = useState(false);
-  const channels = useSelector((state: any) => state.app?.channels);
   const selectedTab = useSelector((state: any) => state.app?.selectedTab);
   console.log({ selectedTab });
+  const channels = useSelector((state: any) => state.app?.channels);
   const channelArray = Object.entries(channels);
+  let allObj = [
+    "All",
+    {
+      image: allLogo,
+      key: "All",
+      name: "All",
+      visible: true,
+    },
+  ];
+
+  // Convert the allObj array to a key-value pair format
+  const allObjEntry: any = [allObj[0], allObj[1]];
+
+  // Add the allObjEntry to the start of channelArray
+  channelArray.unshift(allObjEntry);
+
+  // Convert the channelArray back to an object
+  const updatedChannels = Object.fromEntries(channelArray);
+  console.log({ updatedChannels });
+
   const selectedChannel = useSelector(
     (state: any) => state.selectedChannels.channel
   );
@@ -169,6 +188,7 @@ function MenuComp() {
       })
     );
   };
+  console.log("selectedChannel.length", selectedChannel.length);
 
   return (
     <>
@@ -181,9 +201,48 @@ function MenuComp() {
             <IonSegment scrollable value="all">
               {channelArray.map((data: any, index: any) => (
                 <IonSegmentButton
-                  onClick={() => onSelect(data[1].key)}
+                  onClick={() => {
+                    if (data[1].key == "All") {
+                      getAllChannels();
+                    } else {
+                      onSelect(data[1].key);
+                    }
+                  }}
                   value={data[1]?.key}
                 >
+                  {selectedChannel.length == 0 && data[1].key == "All" ? (
+                    <IonIcon
+                      style={{
+                        marginTop: -20,
+                        position: "relative",
+                        right: -20,
+                        top: 25,
+                      }}
+                      icon={checkmarkCircle}
+                    />
+                  ) : selectedChannel.includes(data[1].key) ? (
+                    <IonIcon
+                      style={{
+                        marginTop: -20,
+                        position: "relative",
+                        right: -20,
+                        top: 25,
+                      }}
+                      icon={checkmarkCircle}
+                    />
+                  ) : selectedChannel.length < 1 && data[1].key == "All" ? (
+                    <IonIcon
+                      style={{
+                        marginTop: -20,
+                        position: "relative",
+                        right: -20,
+                        top: 25,
+                      }}
+                      icon={""}
+                    />
+                  ) : (
+                    <div style={{ marginTop: 20 }}></div>
+                  )}
                   <IonImg
                     className={styles.channelLogos}
                     src={data[1]?.image}
