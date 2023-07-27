@@ -26,6 +26,7 @@ const CardsContainer: React.FC = ({ news }: any) => {
   const channels = useSelector((state: reducerState) => state.app?.channels);
 
   let cards = [1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2];
+
   return (
     <IonGrid>
       <IonRow>

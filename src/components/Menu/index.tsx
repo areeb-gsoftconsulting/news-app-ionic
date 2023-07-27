@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import {
   IonButton,
   IonContent,
@@ -6,6 +6,8 @@ import {
   IonHeader,
   IonIcon,
   IonImg,
+  IonInfiniteScroll,
+  IonInfiniteScrollContent,
   IonLabel,
   IonMenu,
   IonMenuToggle,
@@ -46,6 +48,10 @@ function MenuComp() {
   const selectedChannel = useSelector(
     (state: any) => state.selectedChannels.channel
   );
+  const [pageNumber, setPageNumber] = useState(2);
+  const [pagingLoading, setPagingLoading] = useState(false);
+  const [paginationError, setPaginationError] = useState("");
+  const loading = useSelector((state: any) => state.loading.isLoadingVisible);
 
   console.log({ selectedChannel });
   useEffect(() => {
@@ -96,6 +102,60 @@ function MenuComp() {
     }
   };
 
+  const onEndReach = useCallback(
+    async (e: any) => {
+      try {
+        if (
+          !pagingLoading &&
+          news &&
+          news?.length > 19 &&
+          paginationError == ""
+        ) {
+          setPagingLoading(true);
+
+          let response = await getCategoryNews(
+            {
+              category: selectedTab,
+              source: selectedChannel.toString(),
+            },
+            pageNumber,
+            30
+          );
+          if (response && response?.status == true && response?.data) {
+            setNews((prv: any) => prv.concat(response?.data));
+
+            if (response?.data?.length > 0) {
+              setPageNumber((prev) => prev + 1);
+              if (response?.message) {
+                console.log("esponse.message");
+              }
+            } else {
+              setPaginationError("0 news found");
+            }
+            setPagingLoading(false);
+          } else {
+            setPaginationError("0 news found");
+            setPagingLoading(false);
+          }
+        }
+      } catch (err) {
+        setPaginationError("0 news found");
+        setPagingLoading(false);
+      } finally {
+        e.target.complete();
+      }
+    },
+    [
+      pagingLoading,
+      setPagingLoading,
+      news,
+      selectedTab,
+      paginationError,
+      pageNumber,
+      setNews,
+    ]
+  );
+
   const getAllChannels = () => {
     dispatch(
       selectedChannelAction.getSelectedChannels({
@@ -133,6 +193,16 @@ function MenuComp() {
             </IonSegment>
           </IonToolbar>
           <CardsContainer news={news} />
+          <IonInfiniteScroll
+            onIonInfinite={(ev) => {
+              onEndReach(ev);
+            }}
+          >
+            <IonInfiniteScrollContent
+              loadingText="Please wait..."
+              loadingSpinner="bubbles"
+            ></IonInfiniteScrollContent>
+          </IonInfiniteScroll>
         </IonContent>
         {/* footer */}
         <IonFooter translucent>
