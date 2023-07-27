@@ -251,7 +251,7 @@ function MenuComp() {
               ))}
             </IonSegment>
           </IonToolbar>
-          <CardsContainer news={news} />
+          <CardsContainer news={news} loader={loader} />
           <IonInfiniteScroll
             onIonInfinite={(ev) => {
               onEndReach(ev);

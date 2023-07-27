@@ -21,7 +21,7 @@ import { reducerState } from "../../models/types";
 import moment from "moment";
 import styles from "./cards.module.css";
 
-const CardsContainer: React.FC = ({ news }: any) => {
+const CardsContainer: React.FC = ({ news, loader }: any) => {
   console.log("cards com", news);
   const channels = useSelector((state: reducerState) => state.app?.channels);
 
@@ -30,7 +30,7 @@ const CardsContainer: React.FC = ({ news }: any) => {
   return (
     <IonGrid>
       <IonRow>
-        {news == null
+        {loader == true || news == null
           ? cards.map((data, index) => {
               return (
                 <IonCol
