@@ -26,6 +26,7 @@ const Header: React.FC<ContainerProps> = () => {
     [];
   const dispatch = useDispatch();
   const selectedTab = useSelector((state: any) => state.app?.selectedTab);
+  console.log("selectedTab==>", selectedTab, tabs[0]?.key);
 
   return (
     <IonHeader>
@@ -40,10 +41,7 @@ const Header: React.FC<ContainerProps> = () => {
       </IonToolbar>
       {/* /categories */}
       <IonToolbar>
-        <IonSegment
-          scrollable
-          value={selectedTab == "" ? tabs[0]?.key : selectedTab}
-        >
+        <IonSegment scrollable value={selectedTab}>
           {tabs.map((data: any, index: any) => (
             <IonSegmentButton
               onClick={(e: any) => dispatch(onSelectTab(data.index))}

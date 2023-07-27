@@ -88,7 +88,7 @@ function MenuComp() {
     try {
       let response = await getCategoryNews(
         {
-          category: selectedTab,
+          category: selectedTab == "TopNews" ? "" : selectedTab,
           source: selectedChannel.toString(),
         },
         1,
@@ -134,7 +134,7 @@ function MenuComp() {
 
           let response = await getCategoryNews(
             {
-              category: selectedTab,
+              category: selectedTab == "TopNews" ? "" : selectedTab,
               source: selectedChannel.toString(),
             },
             pageNumber,

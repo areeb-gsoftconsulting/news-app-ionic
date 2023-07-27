@@ -15,7 +15,7 @@ const initialState: appState = {
   onSwipe: 0,
   isRatingDialogVisible: false,
   currentRoute: "Home",
-  selectedTab: "",
+  selectedTab: "TopNews",
 };
 
 const AppState = createSlice({
