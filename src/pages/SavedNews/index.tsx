@@ -3,7 +3,7 @@ import MenuComponent from "../../components/MenuComponent";
 import Card from "../../components/CustomCard";
 import HeaderWithoutTabs from "../../components/Header/Header";
 
-const LiveTv: React.FC = () => {
+const SavedNews: React.FC = () => {
   return (
     <IonPage>
       <MenuComponent />
@@ -11,7 +11,7 @@ const LiveTv: React.FC = () => {
         <HeaderWithoutTabs />
         <IonContent fullscreen>
           {/* /channels */}
-          <IonText>i am TV</IonText>
+          <IonText>i am SavedNews</IonText>
           <Card />
         </IonContent>
       </IonPage>
@@ -19,4 +19,4 @@ const LiveTv: React.FC = () => {
   );
 };
 
-export default LiveTv;
+export default SavedNews;

@@ -9,12 +9,14 @@ import {
   IonTitle,
 } from "@ionic/react";
 import { IonReactRouter } from "@ionic/react-router";
-import { playCircle, tvSharp, newspaperSharp, saveSharp } from "ionicons/icons";
+import { homeSharp, tvSharp, newspaperSharp, saveSharp } from "ionicons/icons";
 import React from "react";
 import { Redirect, Route } from "react-router";
 import Header from "../Header";
 import MenuComp from "../Menu";
 import LiveTv from "../../pages/LiveTv/LiveTv";
+import NewsPapers from "../../pages/NewsPapers";
+import SavedNews from "../../pages/SavedNews";
 
 const BottomTabs: React.FC = () => {
   return (
@@ -29,13 +31,17 @@ const BottomTabs: React.FC = () => {
         */}
           <Route path="/home" render={() => <MenuComp />} exact={true} />
           <Route path="/liveTv" render={() => <LiveTv />} exact={true} />
-          <Route path="/library" render={() => <Header />} exact={true} />
-          <Route path="/search" render={() => <Header />} exact={true} />
+          <Route
+            path="/newspapers"
+            render={() => <NewsPapers />}
+            exact={true}
+          />
+          <Route path="/saved" render={() => <SavedNews />} exact={true} />
         </IonRouterOutlet>
 
         <IonTabBar slot="bottom">
           <IonTabButton tab="home" href="/home">
-            <IonIcon icon={playCircle} />
+            <IonIcon icon={homeSharp} />
             <IonLabel>Home</IonLabel>
           </IonTabButton>
 
@@ -44,12 +50,12 @@ const BottomTabs: React.FC = () => {
             <IonLabel>Live Tv</IonLabel>
           </IonTabButton>
 
-          <IonTabButton tab="library" href="/library">
+          <IonTabButton tab="newspapers" href="/newspapers">
             <IonIcon icon={newspaperSharp} />
             <IonLabel>Newspapers</IonLabel>
           </IonTabButton>
 
-          <IonTabButton tab="search" href="/search">
+          <IonTabButton tab="saved" href="/saved">
             <IonIcon icon={saveSharp} />
             <IonLabel>Saved</IonLabel>
           </IonTabButton>
