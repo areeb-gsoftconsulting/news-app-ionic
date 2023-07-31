@@ -2,6 +2,7 @@ import { IonContent, IonPage, IonText } from "@ionic/react";
 import MenuComponent from "../../components/MenuComponent";
 import Card from "../../components/CustomCard";
 import HeaderWithoutTabs from "../../components/Header/Header";
+import Iframe from "react-iframe";
 
 const LiveTv: React.FC = () => {
   return (
@@ -10,8 +11,18 @@ const LiveTv: React.FC = () => {
       <IonPage id="main-content">
         <HeaderWithoutTabs />
         <IonContent fullscreen>
-          {/* /channels */}
-          <IonText>i am TV</IonText>
+          <div style={{ width: 700, margin: "0 auto" }}>
+            <Iframe
+              url="https://dunyanews.tv/live/"
+              width="640px"
+              height="320px"
+              id=""
+              className=""
+              display="block"
+              position="relative"
+            />
+          </div>
+
           <Card />
         </IonContent>
       </IonPage>
