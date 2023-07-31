@@ -10,21 +10,21 @@ import {
   IonTitle,
 } from "@ionic/react";
 import MenuComponent from "../../components/MenuComponent";
-import Card from "../../components/CustomCard";
 import HeaderWithoutTabs from "../../components/Header/Header";
-import Iframe from "react-iframe";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useSelector } from "react-redux";
 import { reducerState } from "../../models/types";
 import AllStreams from "../../services/getAllStreams";
-import LiteYouTubeEmbed from "react-lite-youtube-embed";
-import "react-lite-youtube-embed/dist/LiteYouTubeEmbed.css";
+import YouTube from "react-youtube";
+import { useHistory, useLocation } from "react-router-dom";
 
 const LiveTv: React.FC = () => {
   const [channels, setChannels] = useState([]);
   const [loading, setLoading] = useState(false);
   const [selectedChannel, setSelectedChannel] = useState<any>(null);
   const [playing, setPlaying] = useState(false);
+  const playerRef = useRef<any>(null);
+  let location = useLocation();
   const adminCredentials = useSelector(
     (state: reducerState) => state.user.adminCredentials
   );
@@ -52,6 +52,29 @@ const LiveTv: React.FC = () => {
       console.log("err", err);
     }
   };
+
+  // const playVideo = () => {
+  //   if (playerRef.current) {
+  //     playerRef.current.playVideo();
+  //   }
+  // };
+
+  // Function to pause the video
+  // const pauseVideo = () => {
+  //   if (playerRef.current) {
+  //     playerRef.current.pauseVideo();
+  //   }
+  // };
+
+  // useEffect(() => {
+  //   console.log("window.location.pathname", window.location.pathname);
+  //   if (window.location.pathname == "/liveTv") {
+  //     playVideo();
+  //   } else {
+  //     pauseVideo();
+  //   }
+  // }, [window.location.pathname]);
+
   const startPlayingVedio = (data: any) => {
     setSelectedChannel({
       url: data?.liveYoutubeUrl?.split("watch?v=")[1],
@@ -72,10 +95,7 @@ const LiveTv: React.FC = () => {
         <HeaderWithoutTabs />
         <IonContent fullscreen>
           <div style={{ maxWidth: 600, margin: "0 auto" }}>
-            <LiteYouTubeEmbed
-              id={selectedChannel?.url}
-              title="Live News Channels"
-            />
+            <YouTube videoId={selectedChannel?.url} />
           </div>
           <IonGrid>
             <IonRow>
