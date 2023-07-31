@@ -20,18 +20,25 @@ const NewsPapers: React.FC = () => {
         <IonContent fullscreen>
           <IonGrid>
             <IonRow>
-              {papers.map((data: any, index: any) => (
-                <IonCol
-                  key={index}
-                  sizeXs="12"
-                  sizeSm="6"
-                  sizeMd="6"
-                  sizeLg="6"
-                  sizeXl="6"
-                >
-                  <Card name={data.name} logo={data.logo} />
-                </IonCol>
-              ))}
+              {papers.map((data: any, index: any) => {
+                console.log(data.key);
+                return (
+                  <IonCol
+                    key={index}
+                    sizeXs="12"
+                    sizeSm="6"
+                    sizeMd="6"
+                    sizeLg="6"
+                    sizeXl="6"
+                  >
+                    <Card
+                      name={data.key}
+                      nameTwo={data.name}
+                      logo={data.logo}
+                    />
+                  </IonCol>
+                );
+              })}
             </IonRow>
           </IonGrid>
         </IonContent>

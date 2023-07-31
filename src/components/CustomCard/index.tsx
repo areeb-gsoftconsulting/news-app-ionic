@@ -1,23 +1,22 @@
-import {
-  IonCard,
-  IonCardContent,
-  IonImg,
-  IonItem,
-  IonRow,
-  IonTitle,
-} from "@ionic/react";
-import React from "react";
+import { IonCard, IonImg, IonRow, IonTitle } from "@ionic/react";
+import { useHistory } from "react-router";
 
-const Card: React.FC = ({ name, logo }: any) => {
+const Card = ({ name, nameTwo, logo }: any) => {
+  const history = useHistory();
   return (
-    <IonCard>
+    <IonCard
+      onClick={(e) => {
+        // e.preventDefault();
+        history.push(`/newspapers/${name}`);
+      }}
+    >
       <IonRow class="ion-align-items-center">
         <IonImg
           style={{ height: 100, width: 100 }}
           src={logo}
           alt="newspapers logo"
         />
-        <IonTitle>{name}</IonTitle>
+        <IonTitle>{nameTwo}</IonTitle>
       </IonRow>
     </IonCard>
   );

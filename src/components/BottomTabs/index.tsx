@@ -1,12 +1,10 @@
 import {
-  IonContent,
   IonIcon,
   IonLabel,
   IonRouterOutlet,
   IonTabBar,
   IonTabButton,
   IonTabs,
-  IonTitle,
 } from "@ionic/react";
 import { IonReactRouter } from "@ionic/react-router";
 import { homeSharp, tvSharp, newspaperSharp, saveSharp } from "ionicons/icons";
@@ -17,6 +15,7 @@ import MenuComp from "../Menu";
 import LiveTv from "../../pages/LiveTv/LiveTv";
 import NewsPapers from "../../pages/NewsPapers";
 import SavedNews from "../../pages/SavedNews";
+import NewsPaperView from "../NewspaperView";
 
 const BottomTabs: React.FC = () => {
   return (
@@ -36,6 +35,7 @@ const BottomTabs: React.FC = () => {
             render={() => <NewsPapers />}
             exact={true}
           />
+          <Route path="/newspapers/:id" render={() => <NewsPaperView />} />
           <Route path="/saved" render={() => <SavedNews />} exact={true} />
         </IonRouterOutlet>
 
