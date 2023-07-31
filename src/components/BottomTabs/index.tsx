@@ -9,7 +9,7 @@ import {
   IonTitle,
 } from "@ionic/react";
 import { IonReactRouter } from "@ionic/react-router";
-import { playCircle, radio, library, search } from "ionicons/icons";
+import { playCircle, tvSharp, newspaperSharp, saveSharp } from "ionicons/icons";
 import React from "react";
 import { Redirect, Route } from "react-router";
 import Header from "../Header";
@@ -36,22 +36,22 @@ const BottomTabs: React.FC = () => {
         <IonTabBar slot="bottom">
           <IonTabButton tab="home" href="/home">
             <IonIcon icon={playCircle} />
-            <IonLabel>Listen now</IonLabel>
+            <IonLabel>Home</IonLabel>
           </IonTabButton>
 
           <IonTabButton tab="liveTv" href="/liveTv">
-            <IonIcon icon={radio} />
-            <IonLabel>Radio</IonLabel>
+            <IonIcon icon={tvSharp} />
+            <IonLabel>Live Tv</IonLabel>
           </IonTabButton>
 
           <IonTabButton tab="library" href="/library">
-            <IonIcon icon={library} />
-            <IonLabel>Library</IonLabel>
+            <IonIcon icon={newspaperSharp} />
+            <IonLabel>Newspapers</IonLabel>
           </IonTabButton>
 
           <IonTabButton tab="search" href="/search">
-            <IonIcon icon={search} />
-            <IonLabel>Search</IonLabel>
+            <IonIcon icon={saveSharp} />
+            <IonLabel>Saved</IonLabel>
           </IonTabButton>
         </IonTabBar>
       </IonTabs>
