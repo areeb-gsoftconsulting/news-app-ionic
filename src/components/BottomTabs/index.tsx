@@ -13,6 +13,8 @@ import { playCircle, radio, library, search } from "ionicons/icons";
 import React from "react";
 import { Redirect, Route } from "react-router";
 import Header from "../Header";
+import MenuComp from "../Menu";
+import LiveTv from "../../pages/LiveTv/LiveTv";
 
 const BottomTabs: React.FC = () => {
   return (
@@ -25,8 +27,8 @@ const BottomTabs: React.FC = () => {
 
           Use the component prop when your component depends on the RouterComponentProps passed in automatically.
         */}
-          <Route path="/home" render={() => <Header />} exact={true} />
-          <Route path="/radio" render={() => <Header />} exact={true} />
+          <Route path="/home" render={() => <MenuComp />} exact={true} />
+          <Route path="/liveTv" render={() => <LiveTv />} exact={true} />
           <Route path="/library" render={() => <Header />} exact={true} />
           <Route path="/search" render={() => <Header />} exact={true} />
         </IonRouterOutlet>
@@ -37,7 +39,7 @@ const BottomTabs: React.FC = () => {
             <IonLabel>Listen now</IonLabel>
           </IonTabButton>
 
-          <IonTabButton tab="radio" href="/radio">
+          <IonTabButton tab="liveTv" href="/liveTv">
             <IonIcon icon={radio} />
             <IonLabel>Radio</IonLabel>
           </IonTabButton>

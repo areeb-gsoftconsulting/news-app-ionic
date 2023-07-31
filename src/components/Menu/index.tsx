@@ -263,12 +263,6 @@ function MenuComp() {
             ></IonInfiniteScrollContent>
           </IonInfiniteScroll>
         </IonContent>
-        {/* footer */}
-        <IonFooter translucent>
-          <IonToolbar>
-            <BottomTabs />
-          </IonToolbar>
-        </IonFooter>
       </IonPage>
     </>
   );
