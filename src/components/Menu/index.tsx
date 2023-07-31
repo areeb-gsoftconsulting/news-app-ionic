@@ -188,7 +188,6 @@ function MenuComp() {
       })
     );
   };
-  console.log("selectedChannel.length", selectedChannel.length);
 
   return (
     <>

@@ -1,13 +1,24 @@
-import { IonCard, IonCardContent, IonItem } from "@ionic/react";
+import {
+  IonCard,
+  IonCardContent,
+  IonImg,
+  IonItem,
+  IonRow,
+  IonTitle,
+} from "@ionic/react";
 import React from "react";
 
-const Card: React.FC = () => {
+const Card: React.FC = ({ name, logo }: any) => {
   return (
     <IonCard>
-      <IonCardContent>
-        Here's a small text description for the card content. Nothing more,
-        nothing less.
-      </IonCardContent>
+      <IonRow class="ion-align-items-center">
+        <IonImg
+          style={{ height: 100, width: 100 }}
+          src={logo}
+          alt="newspapers logo"
+        />
+        <IonTitle>{name}</IonTitle>
+      </IonRow>
     </IonCard>
   );
 };
