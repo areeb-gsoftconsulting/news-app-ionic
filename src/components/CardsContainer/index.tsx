@@ -16,17 +16,17 @@ import {
 } from "@ionic/react";
 import React from "react";
 import { saveSharp } from "ionicons/icons";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { reducerState } from "../../models/types";
 import moment from "moment";
 import styles from "./cards.module.css";
+import { onExpandNews } from "../../store/slice/appSlice";
 
 const CardsContainer: React.FC = ({ news, loader }: any) => {
-  console.log("cards com", news);
   const channels = useSelector((state: reducerState) => state.app?.channels);
-
+  const dispatch = useDispatch();
   let cards = [1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2];
-
+  const data = useSelector((state: any) => state.app.newsDetails);
   return (
     <IonGrid>
       <IonRow>
@@ -93,7 +93,13 @@ const CardsContainer: React.FC = ({ news, loader }: any) => {
                   sizeLg="4"
                   sizeXl="2"
                 >
-                  <IonCard className={styles.cards}>
+                  <IonCard
+                    onClick={() => {
+                      console.log("567890dispatch(onExpandNews([data]))");
+                      dispatch(onExpandNews([data]));
+                    }}
+                    className={styles.cards}
+                  >
                     <img
                       alt="Silhouette of mountains"
                       className={styles.image}

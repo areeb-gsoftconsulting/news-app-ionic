@@ -16,6 +16,7 @@ const initialState: appState = {
   isRatingDialogVisible: false,
   currentRoute: "Home",
   selectedTab: "TopNews",
+  newsDetails: [],
 };
 
 const AppState = createSlice({
@@ -79,6 +80,12 @@ const AppState = createSlice({
         selectedTab: action.payload,
       };
     },
+    onExpandNews: (state: any, action) => {
+      return {
+        ...state,
+        newsDetails: action.payload,
+      };
+    },
   },
 });
 
@@ -92,5 +99,6 @@ export const {
   onSwipe,
   saveCurrentRoute,
   onSelectTab,
+  onExpandNews,
 } = AppState.actions;
 export default AppState.reducer;

@@ -9,6 +9,7 @@ export interface appState {
   onSwipe: any;
   currentRoute: string;
   selectedTab: any;
+  newsDetails: any;
 }
 
 export interface responseAction {

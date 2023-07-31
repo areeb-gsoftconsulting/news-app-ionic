@@ -35,6 +35,7 @@ import styles from "../Header/header.module.css";
 import allLogo from "../../images/Tmam.png";
 import getCategoryNews from "../../services/getCategoryNews";
 import * as selectedChannelAction from "../../store/slice/selectedChannelSlice";
+import NewsDetailsModal from "../NewsDetails";
 
 function MenuComp() {
   const dispatch = useDispatch();
@@ -44,6 +45,8 @@ function MenuComp() {
   console.log({ selectedTab });
   const channels = useSelector((state: any) => state.app?.channels);
   const channelArray = Object.entries(channels);
+  const data = useSelector((state: any) => state.app.newsDetails);
+  console.log({ data: data });
   let allObj = [
     "All",
     {
@@ -261,7 +264,10 @@ function MenuComp() {
               loadingSpinner="bubbles"
             ></IonInfiniteScrollContent>
           </IonInfiniteScroll>
+          {data?.length > 0 && <NewsDetailsModal />}
         </IonContent>
+        {/* <IonContent> */}
+        {/* </IonContent> */}
       </IonPage>
     </>
   );
