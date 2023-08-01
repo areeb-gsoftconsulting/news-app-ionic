@@ -193,7 +193,7 @@ function MenuComp() {
   };
 
   return (
-    <>
+    <IonPage>
       <MenuComponent />
       <IonPage id="main-content">
         <Header />
@@ -266,10 +266,8 @@ function MenuComp() {
           </IonInfiniteScroll>
           {data?.length > 0 && <NewsDetailsModal />}
         </IonContent>
-        {/* <IonContent> */}
-        {/* </IonContent> */}
       </IonPage>
-    </>
+    </IonPage>
   );
 }
 export default MenuComp;

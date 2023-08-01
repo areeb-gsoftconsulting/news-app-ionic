@@ -43,43 +43,7 @@ const CardsContainer: React.FC = ({ news, loader }: any) => {
                   sizeXl="3"
                 >
                   <IonCard>
-                    <img
-                      alt="Silhouette of mountains"
-                      src="https://ionicframework.com/docs/img/demos/card-media.png"
-                    />
-                    <IonCardHeader>
-                      <IonCardTitle>Card Title</IonCardTitle>
-                    </IonCardHeader>
-
-                    <IonCardContent>
-                      Here's a small text description for the card content.
-                      Nothing more, nothing less.
-                    </IonCardContent>
-                    <IonRow class="ion-justify-content-between">
-                      <IonRow
-                        style={{
-                          paddingBottom: 0,
-                        }}
-                        class="ion-justify-content-between ion-align-items-center ion-padding"
-                      >
-                        <IonAvatar style={{ height: 20, width: 20 }}>
-                          <img
-                            alt="Silhouette of a person's head"
-                            src="https://ionicframework.com/docs/img/demos/avatar.svg"
-                          />
-                        </IonAvatar>
-                        <p>some</p>
-                        <p>some</p>
-                      </IonRow>
-                      <IonRow
-                        style={{
-                          paddingBottom: 0,
-                        }}
-                        class="ion-align-items-center ion-padding"
-                      >
-                        <IonIcon icon={saveSharp} />
-                      </IonRow>
-                    </IonRow>
+                    <div style={{ height: 250, backgroundColor: "#f7f7f7" }} />
                   </IonCard>
                 </IonCol>
               );
