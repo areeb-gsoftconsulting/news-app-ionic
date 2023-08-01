@@ -16,10 +16,12 @@ import LiveTv from "../../pages/LiveTv/LiveTv";
 import NewsPapers from "../../pages/NewsPapers";
 import SavedNews from "../../pages/SavedNews";
 import NewsPaperView from "../NewspaperView";
+import MenuComponent from "../MenuComponent";
 
 const BottomTabs: React.FC = () => {
   return (
     <IonReactRouter>
+      <MenuComponent />
       <IonTabs>
         <IonRouterOutlet>
           <Redirect exact path="/" to="/home" />

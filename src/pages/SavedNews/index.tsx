@@ -20,62 +20,59 @@ const SavedNews: React.FC = () => {
   const channels = useSelector((state: reducerState) => state.app?.channels);
 
   return (
-    <IonPage>
-      <MenuComponent />
-      <IonPage id="main-content">
-        <HeaderWithoutTabs />
-        <IonContent fullscreen>
-          {saveNews.length < 1 ? (
-            <IonGrid
-              style={{
-                height: "100%",
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-              }}
-            >
-              <IonRow>
-                <IonCol>
-                  <IonText
-                    style={{
-                      fontSize: "24px",
-                      fontWeight: "bold",
-                      textAlign: "center",
-                    }}
-                  >
-                    No Saved News found
-                  </IonText>
+    <IonPage id="main-content">
+      <HeaderWithoutTabs />
+      <IonContent fullscreen>
+        {saveNews.length < 1 ? (
+          <IonGrid
+            style={{
+              height: "100%",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+            }}
+          >
+            <IonRow>
+              <IonCol>
+                <IonText
+                  style={{
+                    fontSize: "24px",
+                    fontWeight: "bold",
+                    textAlign: "center",
+                  }}
+                >
+                  No Saved News found
+                </IonText>
+              </IonCol>
+            </IonRow>
+          </IonGrid>
+        ) : (
+          <IonGrid>
+            <IonRow>
+              {saveNews.map((data: any, index: any) => (
+                <IonCol
+                  key={index}
+                  sizeXs="12"
+                  sizeSm="6"
+                  sizeMd="4"
+                  sizeLg="4"
+                  sizeXl="3"
+                >
+                  <NewsCard
+                    image={data.image}
+                    title={data.title}
+                    channelLogo={channels[data.source]?.image}
+                    shortSummary={data.shortSummary}
+                    time={moment(data?.updatedAt).fromNow()}
+                    channelName={channels[data?.source]?.name}
+                    news={data}
+                  />
                 </IonCol>
-              </IonRow>
-            </IonGrid>
-          ) : (
-            <IonGrid>
-              <IonRow>
-                {saveNews.map((data: any, index: any) => (
-                  <IonCol
-                    key={index}
-                    sizeXs="12"
-                    sizeSm="6"
-                    sizeMd="4"
-                    sizeLg="4"
-                    sizeXl="3"
-                  >
-                    <NewsCard
-                      image={data.image}
-                      title={data.title}
-                      channelLogo={channels[data.source]?.image}
-                      shortSummary={data.shortSummary}
-                      time={moment(data?.updatedAt).fromNow()}
-                      channelName={channels[data?.source]?.name}
-                      news={data}
-                    />
-                  </IonCol>
-                ))}
-              </IonRow>
-            </IonGrid>
-          )}
-        </IonContent>
-      </IonPage>
+              ))}
+            </IonRow>
+          </IonGrid>
+        )}
+      </IonContent>
     </IonPage>
   );
 };

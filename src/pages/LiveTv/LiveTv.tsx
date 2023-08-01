@@ -89,41 +89,38 @@ const LiveTv: React.FC = () => {
   // load channel vedio streaming...
 
   return (
-    <IonPage>
-      <MenuComponent />
-      <IonPage id="main-content">
-        <HeaderWithoutTabs />
-        <IonContent fullscreen>
-          <div style={{ maxWidth: 600, margin: "0 auto" }}>
-            <YouTube videoId={selectedChannel?.url} />
-          </div>
-          <IonGrid>
-            <IonRow>
-              {channels.map((data, index) => (
-                <IonCol
-                  key={index}
-                  sizeXs="12"
-                  sizeSm="6"
-                  sizeMd="6"
-                  sizeLg="6"
-                  sizeXl="6"
-                >
-                  <IonCard onClick={() => startPlayingVedio(data)}>
-                    <IonRow class="ion-align-items-center">
-                      <IonImg
-                        style={{ height: 100, width: 100 }}
-                        src={data?.logo}
-                        alt="newspapers logo"
-                      />
-                      <IonTitle>{data?.name}</IonTitle>
-                    </IonRow>
-                  </IonCard>
-                </IonCol>
-              ))}
-            </IonRow>
-          </IonGrid>
-        </IonContent>
-      </IonPage>
+    <IonPage id="main-content">
+      <HeaderWithoutTabs />
+      <IonContent fullscreen>
+        <div style={{ maxWidth: 600, margin: "0 auto" }}>
+          <YouTube videoId={selectedChannel?.url} />
+        </div>
+        <IonGrid>
+          <IonRow>
+            {channels.map((data, index) => (
+              <IonCol
+                key={index}
+                sizeXs="12"
+                sizeSm="6"
+                sizeMd="6"
+                sizeLg="6"
+                sizeXl="6"
+              >
+                <IonCard onClick={() => startPlayingVedio(data)}>
+                  <IonRow class="ion-align-items-center">
+                    <IonImg
+                      style={{ height: 100, width: 100 }}
+                      src={data?.logo}
+                      alt="newspapers logo"
+                    />
+                    <IonTitle>{data?.name}</IonTitle>
+                  </IonRow>
+                </IonCard>
+              </IonCol>
+            ))}
+          </IonRow>
+        </IonGrid>
+      </IonContent>
     </IonPage>
   );
 };

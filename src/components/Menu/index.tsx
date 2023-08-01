@@ -193,80 +193,74 @@ function MenuComp() {
   };
 
   return (
-    <IonPage>
-      <MenuComponent />
-      <IonPage id="main-content">
-        <Header />
-        <IonContent fullscreen>
-          {/* /channels */}
-          <IonToolbar>
-            <IonSegment scrollable value="all">
-              {channelArray.map((data: any, index: any) => (
-                <IonSegmentButton
-                  onClick={() => {
-                    if (data[1].key == "All") {
-                      getAllChannels();
-                    } else {
-                      onSelect(data[1].key);
-                    }
-                  }}
-                  value={data[1]?.key}
-                >
-                  {selectedChannel.length == 0 && data[1].key == "All" ? (
-                    <IonIcon
-                      style={{
-                        marginTop: -20,
-                        position: "relative",
-                        right: -20,
-                        top: 25,
-                      }}
-                      icon={checkmarkCircle}
-                    />
-                  ) : selectedChannel.includes(data[1].key) ? (
-                    <IonIcon
-                      style={{
-                        marginTop: -20,
-                        position: "relative",
-                        right: -20,
-                        top: 25,
-                      }}
-                      icon={checkmarkCircle}
-                    />
-                  ) : selectedChannel.length < 1 && data[1].key == "All" ? (
-                    <IonIcon
-                      style={{
-                        marginTop: -20,
-                        position: "relative",
-                        right: -20,
-                        top: 25,
-                      }}
-                      icon={""}
-                    />
-                  ) : (
-                    <div style={{ marginTop: 20 }}></div>
-                  )}
-                  <IonImg
-                    className={styles.channelLogos}
-                    src={data[1]?.image}
+    <IonPage id="main-content">
+      <Header />
+      <IonContent fullscreen>
+        {/* /channels */}
+        <IonToolbar>
+          <IonSegment scrollable value="all">
+            {channelArray.map((data: any, index: any) => (
+              <IonSegmentButton
+                onClick={() => {
+                  if (data[1].key == "All") {
+                    getAllChannels();
+                  } else {
+                    onSelect(data[1].key);
+                  }
+                }}
+                value={data[1]?.key}
+              >
+                {selectedChannel.length == 0 && data[1].key == "All" ? (
+                  <IonIcon
+                    style={{
+                      marginTop: -20,
+                      position: "relative",
+                      right: -20,
+                      top: 25,
+                    }}
+                    icon={checkmarkCircle}
                   />
-                </IonSegmentButton>
-              ))}
-            </IonSegment>
-          </IonToolbar>
-          <CardsContainer news={news} loader={loader} />
-          <IonInfiniteScroll
-            onIonInfinite={(ev) => {
-              onEndReach(ev);
-            }}
-          >
-            <IonInfiniteScrollContent
-              loadingText="Please wait..."
-              loadingSpinner="bubbles"
-            ></IonInfiniteScrollContent>
-          </IonInfiniteScroll>
-          {data?.length > 0 && <NewsDetailsModal />}
-        </IonContent>
-      </IonPage>
+                ) : selectedChannel.includes(data[1].key) ? (
+                  <IonIcon
+                    style={{
+                      marginTop: -20,
+                      position: "relative",
+                      right: -20,
+                      top: 25,
+                    }}
+                    icon={checkmarkCircle}
+                  />
+                ) : selectedChannel.length < 1 && data[1].key == "All" ? (
+                  <IonIcon
+                    style={{
+                      marginTop: -20,
+                      position: "relative",
+                      right: -20,
+                      top: 25,
+                    }}
+                    icon={""}
+                  />
+                ) : (
+                  <div style={{ marginTop: 20 }}></div>
+                )}
+                <IonImg className={styles.channelLogos} src={data[1]?.image} />
+              </IonSegmentButton>
+            ))}
+          </IonSegment>
+        </IonToolbar>
+        <CardsContainer news={news} loader={loader} />
+        <IonInfiniteScroll
+          onIonInfinite={(ev) => {
+            onEndReach(ev);
+          }}
+        >
+          <IonInfiniteScrollContent
+            loadingText="Please wait..."
+            loadingSpinner="bubbles"
+          ></IonInfiniteScrollContent>
+        </IonInfiniteScroll>
+        {data?.length > 0 && <NewsDetailsModal />}
+      </IonContent>
     </IonPage>
   );
 }

@@ -26,6 +26,7 @@ setupIonicReact();
 import { store } from "./store";
 import { Provider } from "react-redux";
 import BottomTabs from "./components/BottomTabs";
+import MenuComponent from "./components/MenuComponent";
 const App: React.FC = () => {
   return (
     <Provider store={store}>
