@@ -38,11 +38,10 @@ const NewsCard = ({
   const dispatch = useDispatch();
   const saveNews = useSelector((state: reducerState) => state.user?.saveNews);
   const [isNewsSaved, setIsNewsSaved] = useState(false);
-
-  console.log({ saveNews });
-
+  console.log({ isNewsSaved });
   useEffect(() => {
     checkNewsSaved(); // checkNewsFollow();
+    console.log("i m savedHook");
   }, [saveNews]);
   const checkNewsSaved = useCallback(async () => {
     if (saveNews?.length == 0) {

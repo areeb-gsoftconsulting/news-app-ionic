@@ -26,36 +26,8 @@ import NewsCard from "../NewsCard";
 
 const CardsContainer: React.FC = ({ news, loader }: any) => {
   const channels = useSelector((state: reducerState) => state.app?.channels);
-  const dispatch = useDispatch();
-  let cards = [1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2];
-  const saveNews = useSelector((state: reducerState) => state.user?.saveNews);
-  const [isNewsSaved, setIsNewsSaved] = useState(false);
+  let cards = [1, 2, 2, 2, 2, 2, 2, 2, 2, 2];
 
-  console.log({ isNewsSaved });
-
-  useEffect(() => {
-    checkNewsSaved(); // checkNewsFollow();
-  }, [saveNews]);
-  const checkNewsSaved = useCallback(async () => {
-    if (saveNews?.length == 0) {
-      return;
-    }
-    let index = saveNews.findIndex((data) => data._id == news._id);
-    setIsNewsSaved(index != -1);
-  }, [saveNews, news]);
-
-  const saveTheNews = (news: any) => {
-    let index = saveNews.findIndex((data) => data._id == news._id);
-    if (index != -1) {
-      let data = saveNews.filter((data) => data._id != news._id);
-      setIsNewsSaved(false);
-      dispatch(saveNewsResponse({ news: data }));
-
-      return;
-    }
-    setIsNewsSaved(true);
-    dispatch(saveNewsResponse({ news: [news, ...saveNews] }));
-  };
   return (
     <IonGrid>
       <IonRow>
@@ -128,7 +100,6 @@ const CardsContainer: React.FC = ({ news, loader }: any) => {
                     channelLogo={channels[data.source]?.image}
                     shortSummary={data.shortSummary}
                     time={moment(data?.updatedAt).fromNow()}
-                    isNewsSaved={isNewsSaved}
                     channelName={channels[data?.source]?.name}
                     news={data}
                   />
