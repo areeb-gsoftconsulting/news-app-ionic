@@ -40,7 +40,7 @@ const CardsContainer: React.FC = ({ news, loader }: any) => {
                   sizeSm="6"
                   sizeMd="4"
                   sizeLg="4"
-                  sizeXl="2"
+                  sizeXl="3"
                 >
                   <IonCard>
                     <img
@@ -92,7 +92,7 @@ const CardsContainer: React.FC = ({ news, loader }: any) => {
                   sizeSm="6"
                   sizeMd="4"
                   sizeLg="4"
-                  sizeXl="2"
+                  sizeXl="3"
                 >
                   <NewsCard
                     image={data.image}

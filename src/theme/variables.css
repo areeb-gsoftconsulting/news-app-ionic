@@ -4,6 +4,11 @@ http://ionicframework.com/docs/theming/ */
 /** Ionic CSS Variables **/
 :root {
   /** primary **/
+  --ion-grid-padding-xs: 0px 10px 0px 10px; /* Customize the padding value for xs screens */
+  --ion-grid-padding-sm: 0px 10px 0px 10px; /* Customize the padding value for sm screens */
+  --ion-grid-padding-md: 0px 60px 0px 60px; /* Customize the padding value for md screens */
+  --ion-grid-padding-lg: 0px 100px 0px 100px; /* Customize the padding value for lg screens */
+  --ion-grid-padding-xl: 0px 100px 0px 100px; /* Customize the padding value for xl screens */
 
   --ion-color-primary: #3880ff;
   --ion-color-primary-rgb: 56, 128, 255;
@@ -232,5 +237,36 @@ http://ionicframework.com/docs/theming/ */
     --ion-tab-bar-background: #1f1f1f;
 
     --ion-card-background: #1e1e1e;
+  }
+}
+
+ion-grid {
+  padding: var(
+    --ion-grid-padding-xs
+  ); /* Default padding for all screen sizes */
+}
+
+/* Adjust padding based on screen sizes using responsive utility classes */
+@media (min-width: 576px) {
+  ion-grid {
+    padding: var(--ion-grid-padding-sm); /* Padding for sm screens and up */
+  }
+}
+
+@media (min-width: 768px) {
+  ion-grid {
+    padding: var(--ion-grid-padding-md); /* Padding for md screens and up */
+  }
+}
+
+@media (min-width: 992px) {
+  ion-grid {
+    padding: var(--ion-grid-padding-lg); /* Padding for lg screens and up */
+  }
+}
+
+@media (min-width: 1200px) {
+  ion-grid {
+    padding: var(--ion-grid-padding-xl); /* Padding for xl screens and up */
   }
 }

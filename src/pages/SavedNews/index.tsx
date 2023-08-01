@@ -58,7 +58,7 @@ const SavedNews: React.FC = () => {
                     sizeSm="6"
                     sizeMd="4"
                     sizeLg="4"
-                    sizeXl="2"
+                    sizeXl="3"
                   >
                     <NewsCard
                       image={data.image}
