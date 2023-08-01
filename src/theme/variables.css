@@ -4,6 +4,7 @@ http://ionicframework.com/docs/theming/ */
 /** Ionic CSS Variables **/
 :root {
   /** primary **/
+  --ion-toolbar-background: #fff;
   --ion-grid-padding-xs: 0px 10px 0px 10px; /* Customize the padding value for xs screens */
   --ion-grid-padding-sm: 0px 10px 0px 10px; /* Customize the padding value for sm screens */
   --ion-grid-padding-md: 0px 60px 0px 60px; /* Customize the padding value for md screens */
