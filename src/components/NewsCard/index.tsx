@@ -37,32 +37,18 @@ const NewsCard = ({
   //   const channels = useSelector((state: reducerState) => state.app?.channels);
   const dispatch = useDispatch();
   const saveNews = useSelector((state: reducerState) => state.user?.saveNews);
-  const [isNewsSaved, setIsNewsSaved] = useState(false);
-  console.log({ isNewsSaved });
-  useEffect(() => {
-    checkNewsSaved(); // checkNewsFollow();
-    console.log("i m savedHook");
-  }, [saveNews]);
-  const checkNewsSaved = useCallback(async () => {
-    if (saveNews?.length == 0) {
-      return;
-    }
-    let index = saveNews.findIndex((data) => data._id == news._id);
-    setIsNewsSaved(index != -1);
-  }, [saveNews, news]);
-
+  let isNewsSaved = saveNews.find((data) => data._id == news._id);
   const saveTheNews = () => {
     let index = saveNews.findIndex((data) => data._id == news._id);
     if (index != -1) {
       let data = saveNews.filter((data) => data._id != news._id);
       console.log({ data });
 
-      setIsNewsSaved(false);
       dispatch(saveNewsResponse({ news: data }));
 
       return;
     }
-    setIsNewsSaved(true);
+
     dispatch(saveNewsResponse({ news: [news, ...saveNews] }));
   };
   return (
