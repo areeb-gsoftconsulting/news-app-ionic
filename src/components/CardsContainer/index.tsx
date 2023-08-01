@@ -14,19 +14,48 @@ import {
   IonRow,
   IonTitle,
 } from "@ionic/react";
-import React from "react";
-import { saveSharp } from "ionicons/icons";
+import React, { useCallback, useEffect, useState } from "react";
+import { saveSharp, saveOutline } from "ionicons/icons";
 import { useDispatch, useSelector } from "react-redux";
 import { reducerState } from "../../models/types";
 import moment from "moment";
 import styles from "./cards.module.css";
 import { onExpandNews } from "../../store/slice/appSlice";
+import { saveNewsResponse } from "../../store/slice/userSlice";
+import NewsCard from "../NewsCard";
 
 const CardsContainer: React.FC = ({ news, loader }: any) => {
   const channels = useSelector((state: reducerState) => state.app?.channels);
   const dispatch = useDispatch();
   let cards = [1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2];
-  const data = useSelector((state: any) => state.app.newsDetails);
+  const saveNews = useSelector((state: reducerState) => state.user?.saveNews);
+  const [isNewsSaved, setIsNewsSaved] = useState(false);
+
+  console.log({ isNewsSaved });
+
+  useEffect(() => {
+    checkNewsSaved(); // checkNewsFollow();
+  }, [saveNews]);
+  const checkNewsSaved = useCallback(async () => {
+    if (saveNews?.length == 0) {
+      return;
+    }
+    let index = saveNews.findIndex((data) => data._id == news._id);
+    setIsNewsSaved(index != -1);
+  }, [saveNews, news]);
+
+  const saveTheNews = (news: any) => {
+    let index = saveNews.findIndex((data) => data._id == news._id);
+    if (index != -1) {
+      let data = saveNews.filter((data) => data._id != news._id);
+      setIsNewsSaved(false);
+      dispatch(saveNewsResponse({ news: data }));
+
+      return;
+    }
+    setIsNewsSaved(true);
+    dispatch(saveNewsResponse({ news: [news, ...saveNews] }));
+  };
   return (
     <IonGrid>
       <IonRow>
@@ -93,65 +122,16 @@ const CardsContainer: React.FC = ({ news, loader }: any) => {
                   sizeLg="4"
                   sizeXl="2"
                 >
-                  <IonCard
-                    onClick={() => {
-                      console.log("567890dispatch(onExpandNews([data]))");
-                      dispatch(onExpandNews([data]));
-                    }}
-                    className={styles.cards}
-                  >
-                    <img
-                      alt="Silhouette of mountains"
-                      className={styles.image}
-                      src={data.image}
-                    />
-                    <IonCardHeader>
-                      <IonCardTitle className={styles.header}>
-                        {data.title}
-                      </IonCardTitle>
-                    </IonCardHeader>
-
-                    <IonCardContent className={styles.shortSummary}>
-                      {data.shortSummary}
-                    </IonCardContent>
-                    <IonRow
-                      // class="ion-justify-content-between"
-                      className={styles.cardFooter}
-                    >
-                      <IonRow
-                        style={{
-                          paddingBottom: 0,
-                          width: "86%",
-                          display: "flex",
-                          justifyContent: "space-between",
-                        }}
-                        // class="ion-justify-content-between ion-align-items-center ion-padding"
-                      >
-                        <IonAvatar
-                          style={{ height: 20, width: 20, alignSelf: "center" }}
-                        >
-                          <img
-                            alt="Silhouette of a person's head"
-                            src={channels[data.source]?.image}
-                          />
-                        </IonAvatar>
-                        <p className={styles.channelName}>
-                          {channels[data?.source]?.name}
-                        </p>
-                        <p className={styles.channelName}>
-                          {moment(data?.updatedAt).fromNow()}
-                        </p>
-                      </IonRow>
-                      <IonRow
-                        style={{
-                          paddingBottom: 0,
-                        }}
-                        // class="ion-align-items-center ion-padding"
-                      >
-                        <IonIcon icon={saveSharp} />
-                      </IonRow>
-                    </IonRow>
-                  </IonCard>
+                  <NewsCard
+                    image={data.image}
+                    title={data.title}
+                    channelLogo={channels[data.source]?.image}
+                    shortSummary={data.shortSummary}
+                    time={moment(data?.updatedAt).fromNow()}
+                    isNewsSaved={isNewsSaved}
+                    channelName={channels[data?.source]?.name}
+                    news={data}
+                  />
                 </IonCol>
               );
             })}
