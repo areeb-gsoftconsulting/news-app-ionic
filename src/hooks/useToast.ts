@@ -1,5 +1,5 @@
-import React from "react";
-import { IonButton, useIonToast } from "@ionic/react";
+import React, { useEffect } from "react";
+import { useIonToast } from "@ionic/react";
 
 export const useToast = () => {
   const [present] = useIonToast();
@@ -7,7 +7,7 @@ export const useToast = () => {
   const presentToast = (msg: any) => {
     present({
       message: msg,
-      duration: 1500,
+      duration: 50,
       position: "bottom",
     });
   };

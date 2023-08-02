@@ -1,8 +1,10 @@
 import React, { useCallback, useEffect, useState } from "react";
 import {
   IonButton,
+  IonCol,
   IonContent,
   IonFooter,
+  IonGrid,
   IonHeader,
   IonIcon,
   IonImg,
@@ -13,11 +15,13 @@ import {
   IonMenuToggle,
   IonPage,
   IonRouterOutlet,
+  IonRow,
   IonSegment,
   IonSegmentButton,
   IonTabBar,
   IonTabButton,
   IonTabs,
+  IonText,
   IonTitle,
   IonToolbar,
 } from "@ionic/react";
@@ -36,9 +40,12 @@ import allLogo from "../../images/Tmam.png";
 import getCategoryNews from "../../services/getCategoryNews";
 import * as selectedChannelAction from "../../store/slice/selectedChannelSlice";
 import NewsDetailsModal from "../NewsDetails";
+import { useToast } from "../../hooks/useToast";
 
 function MenuComp() {
   const dispatch = useDispatch();
+  const { presentToast } = useToast();
+
   const [news, setNews] = useState(null);
   const [loader, seLoader] = useState(false);
   const selectedTab = useSelector((state: any) => state.app?.selectedTab);
@@ -149,19 +156,25 @@ function MenuComp() {
             if (response?.data?.length > 0) {
               setPageNumber((prev) => prev + 1);
               if (response?.message) {
-                console.log("esponse.message");
+                console.log("response.message", response.message);
+                presentToast(response.message);
               }
             } else {
               setPaginationError("0 news found");
+              presentToast("0 news found");
             }
             setPagingLoading(false);
           } else {
             setPaginationError("0 news found");
+            presentToast("0 news found");
+
             setPagingLoading(false);
           }
         }
       } catch (err) {
         setPaginationError("0 news found");
+        presentToast("0 news found");
+
         setPagingLoading(false);
       } finally {
         e.target.complete();
@@ -248,7 +261,9 @@ function MenuComp() {
             ))}
           </IonSegment>
         </IonToolbar>
+
         <CardsContainer news={news} loader={loader} />
+
         <IonInfiniteScroll
           onIonInfinite={(ev) => {
             onEndReach(ev);

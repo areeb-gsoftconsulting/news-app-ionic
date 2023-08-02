@@ -12,6 +12,7 @@ import {
   IonIcon,
   IonLabel,
   IonRow,
+  IonText,
   IonTitle,
 } from "@ionic/react";
 import React, { useCallback, useEffect, useState } from "react";
@@ -31,45 +32,70 @@ const CardsContainer: React.FC = ({ news, loader }: any) => {
   return (
     <IonGrid>
       <IonRow>
-        {loader == true || news == null
-          ? cards.map((data, index) => {
-              return (
-                <IonCol
-                  key={index}
-                  sizeXs="12"
-                  sizeSm="6"
-                  sizeMd="4"
-                  sizeLg="4"
-                  sizeXl="3"
+        {loader == true ? (
+          cards.map((data, index) => {
+            return (
+              <IonCol
+                key={index}
+                sizeXs="12"
+                sizeSm="6"
+                sizeMd="4"
+                sizeLg="4"
+                sizeXl="3"
+              >
+                <IonCard>
+                  <div style={{ height: 250, backgroundColor: "#f7f7f7" }} />
+                </IonCard>
+              </IonCol>
+            );
+          })
+        ) : news == null || news?.length < 1 ? (
+          <IonGrid
+            style={{
+              height: "30vh",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+            }}
+          >
+            <IonRow>
+              <IonCol>
+                <IonText
+                  style={{
+                    fontSize: "24px",
+                    fontWeight: "bold",
+                    textAlign: "center",
+                  }}
                 >
-                  <IonCard>
-                    <div style={{ height: 250, backgroundColor: "#f7f7f7" }} />
-                  </IonCard>
-                </IonCol>
-              );
-            })
-          : news.map((data: any, index: any) => {
-              return (
-                <IonCol
-                  key={index}
-                  sizeXs="12"
-                  sizeSm="6"
-                  sizeMd="4"
-                  sizeLg="4"
-                  sizeXl="3"
-                >
-                  <NewsCard
-                    image={data.image}
-                    title={data.title}
-                    channelLogo={channels[data.source]?.image}
-                    shortSummary={data.shortSummary}
-                    time={moment(data?.updatedAt).fromNow()}
-                    channelName={channels[data?.source]?.name}
-                    news={data}
-                  />
-                </IonCol>
-              );
-            })}
+                  No News found
+                </IonText>
+              </IonCol>
+            </IonRow>
+          </IonGrid>
+        ) : (
+          news.map((data: any, index: any) => {
+            return (
+              <IonCol
+                key={index}
+                sizeXs="12"
+                sizeSm="6"
+                sizeMd="4"
+                sizeLg="4"
+                sizeXl="3"
+              >
+                <NewsCard
+                  image={data.image}
+                  title={data.title}
+                  channelLogo={channels[data.source]?.image}
+                  shortSummary={data.shortSummary}
+                  time={moment(data?.updatedAt).fromNow()}
+                  channelName={channels[data?.source]?.name}
+                  news={data}
+                />
+              </IonCol>
+            );
+          })
+        )}
       </IonRow>
     </IonGrid>
   );

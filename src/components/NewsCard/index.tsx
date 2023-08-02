@@ -22,6 +22,7 @@ import moment from "moment";
 import styles from "./cards.module.css";
 import { onExpandNews } from "../../store/slice/appSlice";
 import { saveNewsResponse } from "../../store/slice/userSlice";
+import { useToast } from "../../hooks/useToast";
 
 const NewsCard = ({
   news,
@@ -36,6 +37,8 @@ const NewsCard = ({
 }: any) => {
   //   const channels = useSelector((state: reducerState) => state.app?.channels);
   const dispatch = useDispatch();
+  const { presentToast } = useToast();
+
   const saveNews = useSelector((state: reducerState) => state.user?.saveNews);
   let isNewsSaved = saveNews.find((data) => data._id == news._id);
   const saveTheNews = () => {
@@ -43,11 +46,12 @@ const NewsCard = ({
     if (index != -1) {
       let data = saveNews.filter((data) => data._id != news._id);
       console.log({ data });
-
+      presentToast("News unsaved");
       dispatch(saveNewsResponse({ news: data }));
 
       return;
     }
+    presentToast("News Saved");
 
     dispatch(saveNewsResponse({ news: [news, ...saveNews] }));
   };
