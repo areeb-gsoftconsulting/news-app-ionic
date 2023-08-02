@@ -21,7 +21,7 @@ const customStorage = {
   setItem: async (key, value) => {
     let store = init();
 
-    await store.set({ key, value: value });
+    await store.set(key, value);
   },
   removeItem: async (key) => {
     let store = init();
@@ -45,14 +45,14 @@ middleware.push(sagaMiddleware);
 //  middleware.push(createLogger());
 // }
 
-// const reducers = persistReducer(config, rootReducers);
+const reducers = persistReducer(config, rootReducers);
 const enhancers = [...middleware];
 const persistConfig: any = { enhancers };
 
 export const store = configureStore({
-  reducer: rootReducers,
+  reducer: reducers,
   middleware: enhancers,
 });
 
 sagaMiddleware.run(sagas);
-// export const persistor = persistStore(store, persistConfig);
+export const persistor = persistStore(store, persistConfig);
