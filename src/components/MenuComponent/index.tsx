@@ -20,8 +20,10 @@ import NavLogo from "../../images/PakistanUrduNewsLogoRound.png";
 import styles from "./menucomo.module.css";
 import { homeSharp, shareSocial, mailSharp } from "ionicons/icons";
 import { useHistory } from "react-router";
+
 const MenuComponent: React.FC = () => {
   const history = useHistory();
+
   return (
     <IonMenu contentId="main-content">
       <IonHeader className="ion-no-border">
