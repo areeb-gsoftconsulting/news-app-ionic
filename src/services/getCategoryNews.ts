@@ -23,7 +23,6 @@ export default function getCategoryNews(
           "&limit=" +
           limit,
     null,
-    "get",
-    null
+    "get"
   );
 }

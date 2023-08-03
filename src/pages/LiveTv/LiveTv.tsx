@@ -42,7 +42,10 @@ const LiveTv: React.FC = () => {
 
       // start playing new channel here...
       if (false) {
-        setSelectedChannel({ url: route?.params?.url, key: "" });
+        // setSelectedChannel({ url: route?.params?.url, key: "" });
+        console.log(
+          'setSelectedChannel({ url: route?.params?.url, key: "" });'
+        );
       } else {
         startPlayingVedio(visibleResponse[0]);
       }
