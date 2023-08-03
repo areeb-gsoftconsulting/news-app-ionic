@@ -52,8 +52,7 @@ function MenuComp() {
   console.log({ selectedTab });
   const channels = useSelector((state: any) => state.app?.channels);
   const channelArray = Object.entries(channels);
-  const data = useSelector((state: any) => state.app.newsDetails);
-  console.log({ data: data });
+
   let allObj = [
     "All",
     {
@@ -274,7 +273,6 @@ function MenuComp() {
             loadingSpinner="bubbles"
           ></IonInfiniteScrollContent>
         </IonInfiniteScroll>
-        {data?.length > 0 && <NewsDetailsModal />}
       </IonContent>
     </IonPage>
   );

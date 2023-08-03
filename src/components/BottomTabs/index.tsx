@@ -17,11 +17,17 @@ import NewsPapers from "../../pages/NewsPapers";
 import SavedNews from "../../pages/SavedNews";
 import NewsPaperView from "../NewspaperView";
 import MenuComponent from "../MenuComponent";
+import { useSelector } from "react-redux";
+import NewsDetailsModal from "../NewsDetails";
 
 const BottomTabs: React.FC = () => {
+  const data = useSelector((state: any) => state.app.newsDetails);
+
   return (
     <IonReactRouter>
       <MenuComponent />
+      {data?.length > 0 && <NewsDetailsModal />}
+
       <IonTabs>
         <IonRouterOutlet>
           <Redirect exact path="/" to="/home" />
