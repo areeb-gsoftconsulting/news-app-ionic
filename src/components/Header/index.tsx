@@ -10,6 +10,7 @@ import {
   IonSegmentButton,
   IonLabel,
   IonSegment,
+  isPlatform,
 } from "@ionic/react";
 import styles from "./header.module.css";
 import { refreshSharp } from "ionicons/icons";
@@ -30,7 +31,13 @@ const Header: React.FC<ContainerProps> = () => {
 
   return (
     <IonHeader>
-      <IonToolbar class={styles.toolbar} mode="ios">
+      <IonToolbar
+        class={styles.toolbar}
+        style={{
+          marginTop: isPlatform("ios") ? 20 : 0,
+        }}
+        mode="md"
+      >
         <IonButtons slot="start">
           <IonMenuButton autoHide={false}></IonMenuButton>
         </IonButtons>
