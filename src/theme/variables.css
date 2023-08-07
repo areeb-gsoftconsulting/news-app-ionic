@@ -241,6 +241,15 @@ http://ionicframework.com/docs/theming/ */
   }
 }
 
+@font-face {
+  font-family: "urduFont";
+  src: url("../assets/NotoNastaliqUrdu-Regular.ttf");
+}
+
+ion-label {
+  font-family: "urduFont";
+}
+
 ion-grid {
   padding: var(
     --ion-grid-padding-xs

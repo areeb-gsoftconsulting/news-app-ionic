@@ -79,8 +79,22 @@ function NewsDetailsModal() {
           </IonToolbar>
           <div style={{ padding: 20 }}>
             <IonImg style={{ height: 300 }} src={data[0]?.image} />
-            <IonTitle style={{ textAlign: "center" }}>{data[0].title}</IonTitle>
-            <p style={{ textAlign: "end" }}>{data[0].summary}</p>
+            <IonTitle
+              style={{
+                textAlign: "center",
+                fontFamily: "urduFont",
+              }}
+            >
+              {data[0].title}
+            </IonTitle>
+            <p
+              style={{
+                textAlign: "end",
+                fontFamily: "urduFont",
+              }}
+            >
+              {data[0].summary}
+            </p>
           </div>
         </IonContent>
       </IonModal>
