@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import {
   createAnimation,
   IonButtons,
@@ -17,10 +17,16 @@ import {
 } from "@ionic/react";
 import { useDispatch, useSelector } from "react-redux";
 import { onExpandNews } from "../../store/slice/appSlice";
+import noImage from "../../images/no-image.png";
 
 function NewsDetailsModal() {
   const modal = useRef<HTMLIonModalElement>(null);
   const data = useSelector((state: any) => state.app.newsDetails);
+  const [imageError, setImageError] = useState(false);
+
+  const handleImageError = () => {
+    setImageError(true);
+  };
   const dispatch = useDispatch();
   console.log({ data });
   function dismiss() {
@@ -78,7 +84,11 @@ function NewsDetailsModal() {
             </IonButtons>
           </IonToolbar>
           <div style={{ padding: 20 }}>
-            <IonImg style={{ height: 300 }} src={data[0]?.image} />
+            <IonImg
+              style={{ height: 300 }}
+              onError={handleImageError}
+              src={!imageError ? data[0]?.image : noImage}
+            />
             <IonTitle
               style={{
                 textAlign: "center",
