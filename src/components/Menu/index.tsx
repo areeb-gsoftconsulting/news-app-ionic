@@ -14,6 +14,8 @@ import {
   IonMenu,
   IonMenuToggle,
   IonPage,
+  IonRefresher,
+  IonRefresherContent,
   IonRouterOutlet,
   IonRow,
   IonSegment,
@@ -24,6 +26,7 @@ import {
   IonText,
   IonTitle,
   IonToolbar,
+  RefresherEventDetail,
 } from "@ionic/react";
 import Header from "../Header";
 import CardsContainer from "../CardsContainer";
@@ -41,6 +44,8 @@ import getCategoryNews from "../../services/getCategoryNews";
 import * as selectedChannelAction from "../../store/slice/selectedChannelSlice";
 import NewsDetailsModal from "../NewsDetails";
 import { useToast } from "../../hooks/useToast";
+import { reducerState } from "../../models/types";
+import { enableRefreshing } from "../../store/slice/loadingSlice";
 
 function MenuComp() {
   const dispatch = useDispatch();
@@ -80,15 +85,18 @@ function MenuComp() {
   const [pagingLoading, setPagingLoading] = useState(false);
   const [paginationError, setPaginationError] = useState("");
   const loading = useSelector((state: any) => state.loading.isLoadingVisible);
+  const refreshing = useSelector(
+    (state: reducerState) => state.loading.refreshing
+  );
 
   console.log({ selectedChannel });
   useEffect(() => {
     dispatch(getConfigRequest({}));
-  }, []);
+  }, [refreshing]);
 
   useEffect(() => {
     getChannelNews();
-  }, [selectedChannel, selectedTab]);
+  }, [selectedChannel, selectedTab, refreshing]);
 
   const getChannelNews = async () => {
     seLoader(true);
@@ -204,10 +212,20 @@ function MenuComp() {
     );
   };
 
+  const pullRefresh = useCallback((event: any) => {
+    dispatch(enableRefreshing());
+    if (!refreshing) {
+      event.detail.complete();
+    }
+  }, []);
+
   return (
     <IonPage id="main-content">
       <Header />
       <IonContent fullscreen>
+        <IonRefresher slot="fixed" onIonRefresh={pullRefresh}>
+          <IonRefresherContent></IonRefresherContent>
+        </IonRefresher>
         {/* /channels */}
         <IonToolbar>
           <IonSegment scrollable value="all">

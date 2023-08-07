@@ -17,6 +17,8 @@ import { refreshSharp } from "ionicons/icons";
 import logo from "../../images/HeaderIcon.png";
 import { useDispatch, useSelector } from "react-redux";
 import { onSelectTab } from "../../store/slice/appSlice";
+import { useCallback } from "react";
+import { enableRefreshing } from "../../store/slice/loadingSlice";
 
 interface ContainerProps {}
 
@@ -28,7 +30,9 @@ const Header: React.FC<ContainerProps> = () => {
   const dispatch = useDispatch();
   const selectedTab = useSelector((state: any) => state.app?.selectedTab);
   console.log("selectedTab==>", selectedTab, tabs[0]?.key);
-
+  const refreshing = useCallback(() => {
+    dispatch(enableRefreshing());
+  }, []);
   return (
     <IonHeader>
       <IonToolbar
@@ -42,7 +46,7 @@ const Header: React.FC<ContainerProps> = () => {
           <IonMenuButton autoHide={false}></IonMenuButton>
         </IonButtons>
         <IonImg className={styles.headerlogo} src={logo} />
-        <IonButtons slot="end">
+        <IonButtons onClick={refreshing} slot="end">
           <IonIcon icon={refreshSharp}></IonIcon>
         </IonButtons>
       </IonToolbar>
