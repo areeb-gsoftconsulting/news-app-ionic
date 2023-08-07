@@ -65,7 +65,7 @@ const BottomTabs: React.FC = () => {
 
           <IonTabButton tab="saved" href="/saved">
             <IonIcon icon={saveSharp} />
-            <IonLabel>محفوظ خبریں۔</IonLabel>
+            <IonLabel>محفوظ خبریں</IonLabel>
           </IonTabButton>
         </IonTabBar>
       </IonTabs>
