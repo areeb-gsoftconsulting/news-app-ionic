@@ -8,7 +8,7 @@ import {
 } from "@ionic/react";
 import { IonReactRouter } from "@ionic/react-router";
 import { homeSharp, tvSharp, newspaperSharp, saveSharp } from "ionicons/icons";
-import React from "react";
+import React, { useEffect } from "react";
 import { Redirect, Route } from "react-router";
 import Header from "../Header";
 import MenuComp from "../Menu";
@@ -19,9 +19,44 @@ import NewsPaperView from "../NewspaperView";
 import MenuComponent from "../MenuComponent";
 import { useSelector } from "react-redux";
 import NewsDetailsModal from "../NewsDetails";
+import { PushNotifications } from "@capacitor/push-notifications";
 
 const BottomTabs: React.FC = () => {
   const data = useSelector((state: any) => state.app.newsDetails);
+
+  /////
+  const registerNotifications = async () => {
+    let permStatus = await PushNotifications.checkPermissions();
+    console.log({ permStatus });
+
+    if (permStatus.receive === "prompt") {
+      permStatus = await PushNotifications.requestPermissions();
+    }
+
+    if (permStatus.receive !== "granted") {
+      throw new Error("User denied permissions!");
+    }
+
+    //
+    try {
+      let token = await PushNotifications.register();
+      console.log({ token });
+      PushNotifications.addListener("registration", (token: any) => {
+        console.log(token, "Push registration success");
+      });
+    } catch (error) {
+      PushNotifications.addListener("registrationError", (error: any) => {
+        alert("Error on registration: " + JSON.stringify(error));
+      });
+    }
+
+    // Some issue with our setup and push will not work
+  };
+
+  useEffect(() => {
+    registerNotifications();
+  }, []);
+  /////
 
   return (
     <IonReactRouter>

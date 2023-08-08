@@ -1022,6 +1022,11 @@
   resolved "https://registry.npmjs.org/@capacitor/keyboard/-/keyboard-5.0.6.tgz"
   integrity sha512-9GewAa/y2Hwkdw/Be8MTdiAjrFZ7TPDKpR44M0Y/0QMnK+mBbgzcoZ/UkuumWv6e2F1IAI+VY5eYVQHDeZcRoA==
 
+"@capacitor/push-notifications@^5.0.6":
+  version "5.0.6"
+  resolved "https://registry.npmjs.org/@capacitor/push-notifications/-/push-notifications-5.0.6.tgz"
+  integrity sha512-o4/EcP13XduazhJkoVWEVrRD07YcqT9Uz0pQ48SItRNjtgDhcQW1vAEo6tSL6FVA5NkxNhJikk8TUeXobgOhEg==
+
 "@capacitor/status-bar@5.0.6":
   version "5.0.6"
   resolved "https://registry.npmjs.org/@capacitor/status-bar/-/status-bar-5.0.6.tgz"
