@@ -1,6 +1,9 @@
 .cards {
   height: 300px;
 }
+.cardsmobile {
+  height: 100%;
+}
 .header {
   font-size: 12px;
   display: -webkit-box;

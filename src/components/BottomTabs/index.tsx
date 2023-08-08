@@ -50,22 +50,22 @@ const BottomTabs: React.FC = () => {
         <IonTabBar slot="bottom">
           <IonTabButton tab="home" href="/home">
             <IonIcon icon={homeSharp} />
-            <IonLabel>ہوم پیج</IonLabel>
+            <IonLabel style={{ fontSize: "10px" }}>ہوم پیج</IonLabel>
           </IonTabButton>
 
           <IonTabButton tab="liveTv" href="/liveTv">
             <IonIcon icon={tvSharp} />
-            <IonLabel>لائیو ٹی وی</IonLabel>
+            <IonLabel style={{ fontSize: "10px" }}>لائیو ٹی وی</IonLabel>
           </IonTabButton>
 
           <IonTabButton tab="newspapers" href="/newspapers">
             <IonIcon icon={newspaperSharp} />
-            <IonLabel>اخبارات</IonLabel>
+            <IonLabel style={{ fontSize: "10px" }}>اخبارات</IonLabel>
           </IonTabButton>
 
           <IonTabButton tab="saved" href="/saved">
             <IonIcon icon={saveSharp} />
-            <IonLabel>محفوظ خبریں</IonLabel>
+            <IonLabel style={{ fontSize: "10px" }}>محفوظ خبریں</IonLabel>
           </IonTabButton>
         </IonTabBar>
       </IonTabs>

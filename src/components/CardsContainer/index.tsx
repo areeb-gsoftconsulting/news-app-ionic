@@ -25,7 +25,7 @@ import { onExpandNews } from "../../store/slice/appSlice";
 import { saveNewsResponse } from "../../store/slice/userSlice";
 import NewsCard from "../NewsCard";
 
-const CardsContainer: React.FC = ({ news, loader }: any) => {
+const CardsContainer = ({ news, loader }: any) => {
   const channels = useSelector((state: reducerState) => state.app?.channels);
   let cards = [1, 2, 2, 2, 2, 2, 2, 2, 2, 2];
 

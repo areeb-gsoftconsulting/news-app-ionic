@@ -59,7 +59,7 @@ const Header: React.FC<ContainerProps> = () => {
               key={index}
               value={data.index}
             >
-              <IonLabel>{data?.title}</IonLabel>
+              <IonLabel style={{ padding: "6px" }}>{data?.title}</IonLabel>
             </IonSegmentButton>
           ))}
         </IonSegment>

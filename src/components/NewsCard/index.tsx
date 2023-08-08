@@ -24,6 +24,8 @@ import { onExpandNews } from "../../store/slice/appSlice";
 import { saveNewsResponse } from "../../store/slice/userSlice";
 import { useToast } from "../../hooks/useToast";
 import noImage from "../../images/no-image.png";
+import { isPlatform } from "@ionic/react";
+
 const NewsCard = ({
   news,
   loader,
@@ -39,6 +41,7 @@ const NewsCard = ({
   const dispatch = useDispatch();
   const { presentToast } = useToast();
   const [imageError, setImageError] = useState(false);
+  const [expand, setExpand] = useState(false);
 
   const handleImageError = () => {
     setImageError(true);
@@ -61,17 +64,21 @@ const NewsCard = ({
     dispatch(saveNewsResponse({ news: [news, ...saveNews] }));
   };
   return (
-    <IonCard className={styles.cards}>
+    <IonCard className={expand ? styles.cardsMobile : styles.cards}>
       <img
         onClick={() => {
-          console.log("567890dispatch(onExpandNews([data]))");
-          dispatch(onExpandNews([news]));
+          if (isPlatform("mobile")) {
+            setExpand(!expand);
+          } else {
+            dispatch(onExpandNews([news]));
+          }
         }}
         alt="Silhouette of mountains"
         className={styles.image}
         onError={handleImageError}
         src={!imageError ? image : noImage}
       />
+
       <div
         style={{
           display: "flex",
@@ -86,6 +93,19 @@ const NewsCard = ({
         <IonCardContent className={styles.shortSummary}>
           {shortSummary}
         </IonCardContent>
+        {expand && (
+          <p
+            style={{
+              textAlign: "end",
+              fontFamily: "urduFont",
+              paddingLeft: "5px",
+              paddingRight: "5px",
+              fontSize: "10px",
+            }}
+          >
+            {news.summary}
+          </p>
+        )}
         <IonRow
           // class="ion-justify-content-between"
           className={styles.cardFooter}
@@ -104,7 +124,7 @@ const NewsCard = ({
                 height: 20,
                 width: 20,
                 alignSelf: "center",
-                paddingRight: "5px",
+                marginRight: "5px",
               }}
             >
               <img alt="Silhouette of a person's head" src={channelLogo} />
