@@ -95,11 +95,18 @@ const NewsCard = ({
               paddingBottom: 0,
               width: "60%",
               display: "flex",
-              justifyContent: "space-between",
+              justifyContent: "left",
             }}
             // class="ion-justify-content-between ion-align-items-center ion-padding"
           >
-            <IonAvatar style={{ height: 20, width: 20, alignSelf: "center" }}>
+            <IonAvatar
+              style={{
+                height: 20,
+                width: 20,
+                alignSelf: "center",
+                paddingRight: "5px",
+              }}
+            >
               <img alt="Silhouette of a person's head" src={channelLogo} />
             </IonAvatar>
             <p className={styles.channelName}>{channelName}</p>

@@ -35,6 +35,7 @@
 .channelName {
   font-size: 10px;
   font-family: "urduFont";
+  padding-left: 4px;
 }
 .cardFooter {
   /* justify-content: space-between !important; */
@@ -42,7 +43,9 @@
   /* margin-top: 20px; */
   width: 100%;
   display: flex;
-  justify-content: space-around;
+  justify-content: space-between;
+  padding-left: 10px;
+  padding-right: 10px;
   align-items: center;
   flex-wrap: nowrap;
   align-content: center;
