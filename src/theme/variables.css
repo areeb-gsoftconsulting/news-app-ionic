@@ -248,6 +248,7 @@ http://ionicframework.com/docs/theming/ */
 
 ion-label {
   font-family: "urduFont";
+  padding: 7px;
 }
 
 ion-grid {

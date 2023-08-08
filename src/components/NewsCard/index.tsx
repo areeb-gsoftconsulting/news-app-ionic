@@ -33,6 +33,7 @@ const NewsCard = ({
   shortSummary,
   time,
   //   isNewsSaved,
+  askForConfirmation,
   channelName,
 }: any) => {
   //   const channels = useSelector((state: reducerState) => state.app?.channels);
@@ -113,6 +114,10 @@ const NewsCard = ({
           >
             <IonIcon
               onClick={saveTheNews}
+              icon={isNewsSaved ? saveSharp : saveOutline}
+            />
+            <IonIcon
+              onClick={() => askForConfirmation(news)}
               icon={isNewsSaved ? saveSharp : saveOutline}
             />
           </IonRow>

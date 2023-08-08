@@ -27,6 +27,7 @@ import {
   IonTitle,
   IonToolbar,
   RefresherEventDetail,
+  useIonAlert,
 } from "@ionic/react";
 import Header from "../Header";
 import CardsContainer from "../CardsContainer";
@@ -46,17 +47,21 @@ import NewsDetailsModal from "../NewsDetails";
 import { useToast } from "../../hooks/useToast";
 import { reducerState } from "../../models/types";
 import { enableRefreshing } from "../../store/slice/loadingSlice";
+import { IonAlert } from "@ionic/react";
+import sendNotification from "../../services/notification";
 
 function MenuComp() {
   const dispatch = useDispatch();
   const { presentToast } = useToast();
-
+  const [handlerMessage, setHandlerMessage] = useState("");
+  const [roleMessage, setRoleMessage] = useState("");
   const [news, setNews] = useState(null);
   const [loader, seLoader] = useState(false);
   const selectedTab = useSelector((state: any) => state.app?.selectedTab);
   console.log({ selectedTab });
   const channels = useSelector((state: any) => state.app?.channels);
   const channelArray = Object.entries(channels);
+  const [presentAlert] = useIonAlert();
 
   let allObj = [
     "All",
@@ -219,6 +224,47 @@ function MenuComp() {
     }
   }, []);
 
+  const askForConfirmation = (news) => {
+    console.log("runing from btn");
+    // return;
+    presentAlert({
+      header: "Urdu Shorts",
+      message: "Do you want to send the notification?",
+      buttons: [
+        {
+          text: "OK",
+          handler: () => {
+            // Action to perform when "OK" button is clicked
+
+            sendNotification({
+              credentials: {
+                userName: "adminCredentials.userName",
+                password: "adminCredentials.password",
+              },
+              body: {
+                newsId: news?._id,
+                topic: "announcementsTesting",
+              },
+            }).then((response) => {
+              if (response.status == 200) {
+                presentToast("Notification sent");
+              } else {
+                presentToast("Failed to send notification");
+              }
+            });
+          },
+        },
+        {
+          text: "No",
+          handler: () => {
+            // Action to perform when "No" button is clicked
+            console.log("No button clicked");
+            // Add your custom logic here
+          },
+        },
+      ],
+    });
+  };
   return (
     <IonPage id="main-content">
       <Header />
@@ -279,7 +325,11 @@ function MenuComp() {
           </IonSegment>
         </IonToolbar>
 
-        <CardsContainer news={news} loader={loader} />
+        <CardsContainer
+          askForConfirmation={askForConfirmation}
+          news={news}
+          loader={loader}
+        />
 
         <IonInfiniteScroll
           onIonInfinite={(ev) => {
