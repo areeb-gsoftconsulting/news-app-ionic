@@ -11,7 +11,7 @@ http://ionicframework.com/docs/theming/ */
   --ion-grid-padding-lg: 0px 100px 0px 100px; /* Customize the padding value for lg screens */
   --ion-grid-padding-xl: 0px 100px 0px 100px; /* Customize the padding value for xl screens */
 
-  --ion-color-primary: #3880ff;
+  --ion-color-primary: green;
   --ion-color-primary-rgb: 56, 128, 255;
   --ion-color-primary-contrast: #ffffff;
   --ion-color-primary-contrast-rgb: 255, 255, 255;
@@ -90,7 +90,7 @@ http://ionicframework.com/docs/theming/ */
    */
 
   body {
-    --ion-color-primary: #428cff;
+    --ion-color-primary: green;
     --ion-color-primary-rgb: 66, 140, 255;
     --ion-color-primary-contrast: #ffffff;
     --ion-color-primary-contrast-rgb: 255, 255, 255;
@@ -254,6 +254,17 @@ ion-grid {
   padding: var(
     --ion-grid-padding-xs
   ); /* Default padding for all screen sizes */
+}
+
+.tab-selected {
+  color: green;
+}
+
+.segment-button-checked::part(native) {
+  color: green;
+}
+ion-segment-button {
+  --indicator-color: green;
 }
 
 /* Adjust padding based on screen sizes using responsive utility classes */

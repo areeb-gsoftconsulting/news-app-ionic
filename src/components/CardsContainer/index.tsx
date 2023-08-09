@@ -44,7 +44,13 @@ const CardsContainer = ({ news, loader }: any) => {
                 sizeXl="3"
               >
                 <IonCard>
-                  <div style={{ height: 250, backgroundColor: "#f7f7f7" }} />
+                  <div
+                    style={{
+                      height: 250,
+                      backgroundColor:
+                        "var(--ion-card-background, var(--ion-item-background, var(--ion-background-color, #fff)))",
+                    }}
+                  />
                 </IonCard>
               </IonCol>
             );
