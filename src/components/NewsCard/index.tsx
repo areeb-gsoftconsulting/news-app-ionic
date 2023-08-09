@@ -113,9 +113,11 @@ const NewsCard = ({
           <IonRow
             style={{
               paddingBottom: 0,
-              width: "60%",
+              width: "100%",
               display: "flex",
+              flexDirection: "row",
               justifyContent: "left",
+              flexWrap: "nowrap",
             }}
             // class="ion-justify-content-between ion-align-items-center ion-padding"
           >
