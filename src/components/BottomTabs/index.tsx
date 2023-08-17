@@ -19,6 +19,7 @@ import NewsPaperView from "../NewspaperView";
 import MenuComponent from "../MenuComponent";
 import { useSelector } from "react-redux";
 import NewsDetailsModal from "../NewsDetails";
+import NotFoundPage from "../../pages/NotFoundPage/NotFoundPage";
 
 const BottomTabs: React.FC = () => {
   const data = useSelector((state: any) => state.app.newsDetails);
@@ -45,6 +46,7 @@ const BottomTabs: React.FC = () => {
           />
           <Route path="/newspapers/:id" render={() => <NewsPaperView />} />
           <Route path="/saved" render={() => <SavedNews />} exact={true} />
+          <Route component={NotFoundPage} />
         </IonRouterOutlet>
 
         <IonTabBar slot="bottom">
