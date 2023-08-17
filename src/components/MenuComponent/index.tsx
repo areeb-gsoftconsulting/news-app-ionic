@@ -23,6 +23,7 @@ import { useHistory } from "react-router";
 
 const MenuComponent: React.FC = () => {
   const history = useHistory();
+  const toggleDarkModeHandler = () => document.body.classList.toggle("dark");
 
   return (
     <IonMenu contentId="main-content">
@@ -33,20 +34,22 @@ const MenuComponent: React.FC = () => {
       </IonHeader>
       <IonContent className="ion-padding">
         <IonList lines="none">
-          <IonTabButton tab="home" href="/home">
-            <IonItem
-              onClick={() => history.push("/home")}
-              className={styles.list}
-            >
-              <IonRow
-                style={{ width: "100%" }}
-                class="ion-justify-content-between"
+          <IonMenuToggle>
+            <IonTabButton tab="home" href="/home">
+              <IonItem
+                onClick={() => history.push("/home")}
+                className={styles.list}
               >
-                <IonLabel>Main Page</IonLabel>
-                <IonIcon icon={homeSharp}></IonIcon>
-              </IonRow>
-            </IonItem>
-          </IonTabButton>
+                <IonRow
+                  style={{ width: "100%" }}
+                  class="ion-justify-content-between"
+                >
+                  <IonLabel>Main Page</IonLabel>
+                  <IonIcon icon={homeSharp}></IonIcon>
+                </IonRow>
+              </IonItem>
+            </IonTabButton>
+          </IonMenuToggle>
 
           <IonTabButton>
             <IonItem className={styles.list}>
@@ -64,7 +67,9 @@ const MenuComponent: React.FC = () => {
                 style={{ width: "100%" }}
                 class="ion-justify-content-between"
               >
-                <IonToggle>Night Mode</IonToggle>
+                <IonToggle onIonChange={toggleDarkModeHandler}>
+                  Night Mode
+                </IonToggle>
               </IonRow>
             </IonItem>
           </IonTabButton>

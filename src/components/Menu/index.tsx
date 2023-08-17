@@ -56,7 +56,10 @@ function MenuComp() {
   const selectedTab = useSelector((state: any) => state.app?.selectedTab);
   console.log({ selectedTab });
   const channels = useSelector((state: any) => state.app?.channels);
-  const channelArray = Object.entries(channels);
+  const tempChannelArray = Object.entries(channels);
+  const channelArray = tempChannelArray.filter(
+    (data) => data[0] !== "JangNews" && data[0] !== "GeoNews"
+  );
 
   let allObj = [
     "All",
