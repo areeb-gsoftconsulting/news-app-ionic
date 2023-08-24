@@ -68,7 +68,7 @@ const MenuComponent: React.FC = () => {
                 class="ion-justify-content-between"
               >
                 <IonToggle onIonChange={toggleDarkModeHandler}>
-                  Night Mode
+                  Dark Mode
                 </IonToggle>
               </IonRow>
             </IonItem>
