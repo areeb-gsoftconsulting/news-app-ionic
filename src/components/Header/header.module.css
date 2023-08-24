@@ -4,6 +4,7 @@
 }
 .toolbar {
   padding: 15px 15px 15px 15px !important;
+  background-color: var(--ion-toolbar-background);
 }
 .channelLogos {
   height: 50px;

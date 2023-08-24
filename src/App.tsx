@@ -25,21 +25,16 @@ import "./theme/variables.css";
 setupIonicReact();
 import { store } from "./store";
 import { Provider } from "react-redux";
-const App: React.FC = () => (
-  <Provider store={store}>
-    <IonApp>
-      <IonReactRouter>
-        <IonRouterOutlet>
-          <Route exact path="/home">
-            <Home />
-          </Route>
-          <Route exact path="/">
-            <Redirect to="/home" />
-          </Route>
-        </IonRouterOutlet>
-      </IonReactRouter>
-    </IonApp>
-  </Provider>
-);
+import BottomTabs from "./components/BottomTabs";
+import MenuComponent from "./components/MenuComponent";
+const App: React.FC = () => {
+  return (
+    <Provider store={store}>
+      <IonApp>
+        <BottomTabs />
+      </IonApp>
+    </Provider>
+  );
+};
 
 export default App;

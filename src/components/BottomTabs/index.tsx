@@ -1,22 +1,34 @@
 import {
-  IonContent,
   IonIcon,
   IonLabel,
   IonRouterOutlet,
   IonTabBar,
   IonTabButton,
   IonTabs,
-  IonTitle,
 } from "@ionic/react";
 import { IonReactRouter } from "@ionic/react-router";
-import { playCircle, radio, library, search } from "ionicons/icons";
+import { homeSharp, tvSharp, newspaperSharp, saveSharp } from "ionicons/icons";
 import React from "react";
 import { Redirect, Route } from "react-router";
 import Header from "../Header";
+import MenuComp from "../Menu";
+import LiveTv from "../../pages/LiveTv/LiveTv";
+import NewsPapers from "../../pages/NewsPapers";
+import SavedNews from "../../pages/SavedNews";
+import NewsPaperView from "../NewspaperView";
+import MenuComponent from "../MenuComponent";
+import { useSelector } from "react-redux";
+import NewsDetailsModal from "../NewsDetails";
+import NotFoundPage from "../../pages/NotFoundPage/NotFoundPage";
 
 const BottomTabs: React.FC = () => {
+  const data = useSelector((state: any) => state.app.newsDetails);
+
   return (
     <IonReactRouter>
+      <MenuComponent />
+      {data?.length > 0 && <NewsDetailsModal />}
+
       <IonTabs>
         <IonRouterOutlet>
           <Redirect exact path="/" to="/home" />
@@ -25,31 +37,37 @@ const BottomTabs: React.FC = () => {
 
           Use the component prop when your component depends on the RouterComponentProps passed in automatically.
         */}
-          <Route path="/home" render={() => <Header />} exact={true} />
-          <Route path="/radio" render={() => <Header />} exact={true} />
-          <Route path="/library" render={() => <Header />} exact={true} />
-          <Route path="/search" render={() => <Header />} exact={true} />
+          <Route path="/home" render={() => <MenuComp />} exact={true} />
+          <Route path="/liveTv" render={() => <LiveTv />} exact={true} />
+          <Route
+            path="/newspapers"
+            render={() => <NewsPapers />}
+            exact={true}
+          />
+          <Route path="/newspapers/:id" render={() => <NewsPaperView />} />
+          <Route path="/saved" render={() => <SavedNews />} exact={true} />
+          <Route component={NotFoundPage} />
         </IonRouterOutlet>
 
         <IonTabBar slot="bottom">
           <IonTabButton tab="home" href="/home">
-            <IonIcon icon={playCircle} />
-            <IonLabel>Listen now</IonLabel>
+            <IonIcon icon={homeSharp} />
+            <IonLabel style={{ fontSize: "10px" }}>ہوم پیج</IonLabel>
           </IonTabButton>
 
-          <IonTabButton tab="radio" href="/radio">
-            <IonIcon icon={radio} />
-            <IonLabel>Radio</IonLabel>
+          <IonTabButton tab="liveTv" href="/liveTv">
+            <IonIcon icon={tvSharp} />
+            <IonLabel style={{ fontSize: "10px" }}>لائیو ٹی وی</IonLabel>
           </IonTabButton>
 
-          <IonTabButton tab="library" href="/library">
-            <IonIcon icon={library} />
-            <IonLabel>Library</IonLabel>
+          <IonTabButton tab="newspapers" href="/newspapers">
+            <IonIcon icon={newspaperSharp} />
+            <IonLabel style={{ fontSize: "10px" }}>اخبارات</IonLabel>
           </IonTabButton>
 
-          <IonTabButton tab="search" href="/search">
-            <IonIcon icon={search} />
-            <IonLabel>Search</IonLabel>
+          <IonTabButton tab="saved" href="/saved">
+            <IonIcon icon={saveSharp} />
+            <IonLabel style={{ fontSize: "10px" }}>محفوظ خبریں</IonLabel>
           </IonTabButton>
         </IonTabBar>
       </IonTabs>
