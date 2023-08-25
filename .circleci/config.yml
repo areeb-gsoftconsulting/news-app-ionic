@@ -9,6 +9,9 @@ jobs:
     steps:
       - checkout
       - run:
+          name: npm i
+          command: npm install
+      - run:
           name: Building App
           command: npm run build
 
