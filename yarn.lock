@@ -967,17 +967,17 @@
     "@babel/helper-validator-identifier" "^7.22.5"
     to-fast-properties "^2.0.0"
 
-"@capacitor/android@^5.2.2":
-  version "5.2.2"
-  resolved "https://registry.npmjs.org/@capacitor/android/-/android-5.2.2.tgz"
-  integrity sha512-2kx5C2lJ/DSwPWS7fKvextWhg4AK3SQvQnHgp8+WX6SDYgphBNlGUh45N/qBoMeVM7lqjANJFGQDCk0FjimlWQ==
+"@capacitor/android@^5.6.0":
+  version "5.6.0"
+  resolved "https://registry.npmjs.org/@capacitor/android/-/android-5.6.0.tgz"
+  integrity sha512-6O7xV6K6c8WvQzKxOe7fnhRyoVpS3TNDXy1FyfhvOvclBvu+1JddSdFvW4e4dSL60s2c00sCzNRgYhm+cn0/dQ==
 
 "@capacitor/app@5.0.6":
   version "5.0.6"
   resolved "https://registry.npmjs.org/@capacitor/app/-/app-5.0.6.tgz"
   integrity sha512-6ZXVdnNmaYILasC/RjQw+yfTmq2ZO7Q3v5lFcDVfq3PFGnybyYQh+RstBrYri+376OmXOXxBD7E6UxBhrMzXGA==
 
-"@capacitor/cli@5.2.2":
+"@capacitor/cli@^5.2.2":
   version "5.2.2"
   resolved "https://registry.npmjs.org/@capacitor/cli/-/cli-5.2.2.tgz"
   integrity sha512-h/cefX3sefLcmd4VI2h+fNIYKWH1QCUACWAH8bkdJ+aEL+x2xYbGlqeW6Belb3E2Uvu9OA+cz7YVDnNRcjyQyw==
@@ -1000,10 +1000,10 @@
     tslib "^2.4.0"
     xml2js "^0.5.0"
 
-"@capacitor/core@^5.0.0", "@capacitor/core@^5.2.0", "@capacitor/core@5.2.2":
-  version "5.2.2"
-  resolved "https://registry.npmjs.org/@capacitor/core/-/core-5.2.2.tgz"
-  integrity sha512-3jKECZC5+YD2rljMZm1e/K3AYyoxUmLDZCyofTPbRYPBSI0wJh5ZCkX+XIGzNM0o/Wokl3Voa1JB8xsLC0MPxA==
+"@capacitor/core@^5.0.0", "@capacitor/core@^5.2.2", "@capacitor/core@^5.6.0":
+  version "5.6.0"
+  resolved "https://registry.npmjs.org/@capacitor/core/-/core-5.6.0.tgz"
+  integrity sha512-xJhCOUGPHw0QYDA3YH+CmL6qiV9DH4Ij3yPxSenymjrtLuXI197u9ddCZwGEwgVIkh9kGZBBKzsNkn89SZ2gdQ==
   dependencies:
     tslib "^2.1.0"
 
@@ -1012,10 +1012,10 @@
   resolved "https://registry.npmjs.org/@capacitor/haptics/-/haptics-5.0.6.tgz"
   integrity sha512-UrMcR7p2X10ql4VLlowUuH/VckTeu0lj+RQpekxox14uxDmu5AGIFDK/iDTi8W6QZkxTJRZK6sbCjgwYgNJ7Pw==
 
-"@capacitor/ios@^5.2.2":
-  version "5.2.2"
-  resolved "https://registry.npmjs.org/@capacitor/ios/-/ios-5.2.2.tgz"
-  integrity sha512-6nNhB+G9tamJFMdvPOIATEPIXlh3GNXMq8eeY3xrFO72bBTmQpXdbDQmMJeBbpVlkEnFoVUXiSxAu6O0E9x9Lw==
+"@capacitor/ios@^5.6.0":
+  version "5.6.0"
+  resolved "https://registry.npmjs.org/@capacitor/ios/-/ios-5.6.0.tgz"
+  integrity sha512-iswpOcD5us10hIF5zS4w6k/ekW0A+2pXhDV4AHOBXR4VOkOMI8QJaavgl9JvZ/NVvVNJdEN2rOKCMNh4AH08sw==
 
 "@capacitor/keyboard@5.0.6":
   version "5.0.6"

@@ -112,7 +112,7 @@ const NewsCard = ({
         >
           <IonRow
             style={{
-              paddingBottom: 0,
+              paddingBottom: 4,
               width: "100%",
               display: "flex",
               flexDirection: "row",
@@ -136,7 +136,7 @@ const NewsCard = ({
           </IonRow>
           <IonRow
             style={{
-              paddingBottom: 0,
+              paddingBottom: 2,
             }}
             // class="ion-align-items-center ion-padding"
           >

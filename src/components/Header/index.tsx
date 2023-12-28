@@ -38,7 +38,7 @@ const Header: React.FC<ContainerProps> = () => {
       <IonToolbar
         class={styles.toolbar}
         style={{
-          marginTop: isPlatform("ios") ? 20 : 0,
+          marginTop: isPlatform("ios") ? 28 : 0,
         }}
         mode="md"
       >

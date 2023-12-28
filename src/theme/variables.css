@@ -259,7 +259,7 @@ ion-grid {
 }
 
 .segment-button-checked::part(native) {
-  color: green;
+  color: white;
 }
 ion-segment-button {
   --indicator-color: green;
@@ -275,6 +275,9 @@ ion-segment-button {
 @media (min-width: 768px) {
   ion-grid {
     padding: var(--ion-grid-padding-md); /* Padding for md screens and up */
+  }
+  .segment-button-checked::part(native) {
+    color: green;
   }
 }
 
