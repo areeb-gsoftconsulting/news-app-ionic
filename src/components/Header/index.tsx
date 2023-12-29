@@ -47,7 +47,7 @@ const Header: React.FC<ContainerProps> = () => {
         </IonButtons>
         <IonImg className={styles.headerlogo} src={logo} />
         <IonButtons onClick={refreshing} slot="end">
-          <IonIcon icon={refreshSharp}></IonIcon>
+          <IonIcon icon={refreshSharp} className="ion-icon"></IonIcon>
         </IonButtons>
       </IonToolbar>
       {/* /categories */}
