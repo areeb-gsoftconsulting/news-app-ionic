@@ -1,3 +1,5 @@
+/** @format */
+
 import {
   IonHeader,
   IonToolbar,
@@ -40,14 +42,13 @@ const Header: React.FC<ContainerProps> = () => {
         style={{
           marginTop: isPlatform("ios") ? 28 : 0,
         }}
-        mode="md"
-      >
+        mode="md">
         <IonButtons slot="start">
           <IonMenuButton autoHide={false}></IonMenuButton>
         </IonButtons>
         <IonImg className={styles.headerlogo} src={logo} />
         <IonButtons onClick={refreshing} slot="end">
-          <IonIcon icon={refreshSharp}></IonIcon>
+          <IonIcon icon={refreshSharp} />
         </IonButtons>
       </IonToolbar>
       {/* /categories */}
@@ -57,8 +58,7 @@ const Header: React.FC<ContainerProps> = () => {
             <IonSegmentButton
               onClick={(e: any) => dispatch(onSelectTab(data.index))}
               key={index}
-              value={data.index}
-            >
+              value={data.index}>
               <IonLabel style={{ padding: "6px" }}>{data?.title}</IonLabel>
             </IonSegmentButton>
           ))}

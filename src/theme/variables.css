@@ -1,5 +1,9 @@
-/* Ionic Variables and Theming. For more info, please see:
-http://ionicframework.com/docs/theming/ */
+/**
+ * Ionic Variables and Theming. For more info, please see:
+ * http://ionicframework.com/docs/theming/
+ *
+ * @format
+ */
 
 /** Ionic CSS Variables **/
 :root {
@@ -81,6 +85,7 @@ http://ionicframework.com/docs/theming/ */
   --ion-color-light-contrast-rgb: 0, 0, 0;
   --ion-color-light-shade: #d7d8da;
   --ion-color-light-tint: #f5f6f9;
+  --ion-icon-hover-bg: #f8f8f8;
 }
 
 /*
@@ -151,6 +156,7 @@ body.dark {
   --ion-color-light-contrast-rgb: 255, 255, 255;
   --ion-color-light-shade: #1e2023;
   --ion-color-light-tint: #383a3e;
+  --ion-icon-hover-bg: #282828;
 }
 
 /*
@@ -291,4 +297,10 @@ ion-segment-button {
   ion-grid {
     padding: var(--ion-grid-padding-xl); /* Padding for xl screens and up */
   }
+}
+
+ion-icon:hover {
+  cursor: grab;
+  background-color: var(--ion-icon-hover-bg);
+  border-radius: 50%;
 }
