@@ -35,6 +35,8 @@ const Header: React.FC<ContainerProps> = () => {
   const refreshing = useCallback(() => {
     dispatch(enableRefreshing());
   }, []);
+  console.log("hhhhhh", styles["ion-icon-refresh"]);
+
   return (
     <IonHeader>
       <IonToolbar
@@ -48,7 +50,9 @@ const Header: React.FC<ContainerProps> = () => {
         </IonButtons>
         <IonImg className={styles.headerlogo} src={logo} />
         <IonButtons onClick={refreshing} slot="end">
-          <IonIcon icon={refreshSharp} className="ion-icon"></IonIcon>
+          <IonIcon
+            icon={refreshSharp}
+            className={styles["ion-icon-refresh"]}></IonIcon>
         </IonButtons>
       </IonToolbar>
       {/* /categories */}
