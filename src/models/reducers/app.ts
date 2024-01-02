@@ -10,6 +10,7 @@ export interface appState {
   currentRoute: string;
   selectedTab: any;
   newsDetails: any;
+  onNewsDetails: any;
 }
 
 export interface responseAction {

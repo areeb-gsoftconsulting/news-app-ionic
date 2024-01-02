@@ -91,7 +91,9 @@ const CardsContainer = ({ news, loader }: any) => {
               >
                 <NewsCard
                   image={data.image}
-                  title={data.title}
+                  title={data?.title}
+                  id={data?._id}
+                  link={data?.link}
                   channelLogo={channels[data.source]?.image}
                   shortSummary={data.shortSummary}
                   time={moment(data?.updatedAt).fromNow()}
