@@ -1,5 +1,6 @@
 import {
   IonAvatar,
+  IonButton,
   IonCard,
   IonCardContent,
   IonCardHeader,
@@ -15,17 +16,23 @@ import {
   IonTitle,
 } from "@ionic/react";
 import React, { useCallback, useEffect, useState } from "react";
-import { saveSharp, saveOutline } from "ionicons/icons";
+import {
+  saveSharp,
+  saveOutline,
+  shareOutline,
+  shareSocialOutline,
+} from "ionicons/icons";
 import { useDispatch, useSelector } from "react-redux";
 import { reducerState } from "../../models/types";
 import moment from "moment";
 import styles from "./cards.module.css";
-import { onExpandNews } from "../../store/slice/appSlice";
+import { onExpandNews, onNewsDtail } from "../../store/slice/appSlice";
 import { saveNewsResponse } from "../../store/slice/userSlice";
 import { useToast } from "../../hooks/useToast";
 import noImage from "../../images/no-image.png";
 import { isPlatform } from "@ionic/react";
-
+import { useHistory } from "react-router-dom";
+import { enableLoading } from "../../store/slice/loadingSlice";
 const NewsCard = ({
   news,
   loader,
@@ -34,15 +41,17 @@ const NewsCard = ({
   channelLogo,
   shortSummary,
   time,
+  id,
   //   isNewsSaved,
   channelName,
+  link,
 }: any) => {
   //   const channels = useSelector((state: reducerState) => state.app?.channels);
   const dispatch = useDispatch();
   const { presentToast } = useToast();
   const [imageError, setImageError] = useState(false);
   const [expand, setExpand] = useState(false);
-
+  const history = useHistory();
   const handleImageError = () => {
     setImageError(true);
   };
@@ -64,6 +73,10 @@ const NewsCard = ({
     dispatch(saveNewsResponse({ news: [news, ...saveNews] }));
   };
 
+  const shareNews = () => {
+    dispatch(onNewsDtail([news]));
+    history.push(`/detailnews/${id}`);
+  };
   return (
     <IonCard className={expand ? styles.cardsMobile : styles.cards}>
       <img
@@ -105,8 +118,15 @@ const NewsCard = ({
             }}
           >
             {news.summary}
+            <button
+              style={{ color: "green", backgroundColor: "white" }}
+              onClick={() => history.push("/newswebdetail", { id: link })}
+            >
+              {"تفصیل دیکھیں"}
+            </button>
           </p>
         )}
+        {/* <IonButton className={styles.detailButton}>{"تفصیل دیکھیں"}</IonButton> */}
         <IonRow
           // class="ion-justify-content-between"
           className={styles.cardFooter}
@@ -135,6 +155,16 @@ const NewsCard = ({
             <p className={styles.channelName}>{channelName}</p>
             <p className={styles.channelName}>{time}</p>
           </IonRow>
+          <IonIcon
+            style={{
+              paddingBottom: 2,
+              marginRight: 10,
+            }}
+            onClick={shareNews}
+            // onClick={saveTheNews}
+            icon={shareSocialOutline}
+          />
+
           <IonRow
             style={{
               paddingBottom: 2,

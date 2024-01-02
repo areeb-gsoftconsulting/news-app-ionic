@@ -21,6 +21,7 @@ import { useSelector } from "react-redux";
 import NewsDetailsModal from "../NewsDetails";
 import NotFoundPage from "../../pages/NotFoundPage/NotFoundPage";
 import DetailNews from "../../pages/DetailNews";
+import NewsWebDetail from "../../pages/NewsWebDetail";
 const BottomTabs: React.FC = () => {
   const data = useSelector((state: any) => state.app.newsDetails);
 
@@ -46,7 +47,8 @@ const BottomTabs: React.FC = () => {
           />
           <Route path="/newspapers/:id" render={() => <NewsPaperView />} />
           <Route path="/saved" render={() => <SavedNews />} exact={true} />
-          <Route path="/detailnews" render={() => <DetailNews />} />
+          <Route path="/detailnews/:id" render={() => <DetailNews />} />
+          <Route path="/newswebdetail" render={() => <NewsWebDetail />} />
 
           <Route component={NotFoundPage} />
         </IonRouterOutlet>

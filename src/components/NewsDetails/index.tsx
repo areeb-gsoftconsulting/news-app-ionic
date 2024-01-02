@@ -41,7 +41,11 @@ function NewsDetailsModal() {
       showModal();
     }
   }, [data]);
-
+  const openWebBrowser = () => {
+    if (data[0]?.link) {
+      window.open(data[0]?.link, "_system", "location=yes");
+    } else return;
+  };
   const enterAnimation = (baseEl: HTMLElement) => {
     const root = baseEl.shadowRoot;
 
@@ -105,6 +109,15 @@ function NewsDetailsModal() {
             >
               {data[0].summary}
             </p>
+            <button
+              style={{
+                color: "green",
+                backgroundColor: "white",
+              }}
+              onClick={openWebBrowser}
+            >
+              {"تفصیل دیکھیں"}
+            </button>
           </div>
         </IonContent>
       </IonModal>
