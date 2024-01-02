@@ -1,3 +1,5 @@
+/** @format */
+
 import React, { useEffect, useRef, useState } from "react";
 import {
   createAnimation,
@@ -41,6 +43,7 @@ function NewsDetailsModal() {
       showModal();
     }
   }, [data]);
+
   const openWebBrowser = () => {
     if (data[0]?.link) {
       window.open(data[0]?.link, "_system", "location=yes");
@@ -68,6 +71,9 @@ function NewsDetailsModal() {
   };
 
   const leaveAnimation = (baseEl: HTMLElement) => {
+    setTimeout(() => {
+      dismiss();
+    }, 600);
     return enterAnimation(baseEl).direction("reverse");
   };
 
@@ -78,8 +84,7 @@ function NewsDetailsModal() {
         ref={modal}
         trigger="open-modal"
         enterAnimation={enterAnimation}
-        leaveAnimation={leaveAnimation}
-      >
+        leaveAnimation={leaveAnimation}>
         <IonContent>
           <IonToolbar>
             <IonTitle>News Details</IonTitle>
@@ -97,16 +102,14 @@ function NewsDetailsModal() {
               style={{
                 textAlign: "center",
                 fontFamily: "urduFont",
-              }}
-            >
+              }}>
               {data[0].title}
             </IonTitle>
             <p
               style={{
                 textAlign: "end",
                 fontFamily: "urduFont",
-              }}
-            >
+              }}>
               {data[0].summary}
             </p>
             <button
@@ -114,8 +117,7 @@ function NewsDetailsModal() {
                 color: "green",
                 backgroundColor: "white",
               }}
-              onClick={openWebBrowser}
-            >
+              onClick={openWebBrowser}>
               {"تفصیل دیکھیں"}
             </button>
           </div>

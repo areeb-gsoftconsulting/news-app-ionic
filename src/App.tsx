@@ -1,3 +1,5 @@
+/** @format */
+
 import { Redirect, Route } from "react-router-dom";
 import { IonApp, IonRouterOutlet, setupIonicReact } from "@ionic/react";
 import { IonReactRouter } from "@ionic/react-router";
@@ -23,16 +25,19 @@ import "@ionic/react/css/display.css";
 import "./theme/variables.css";
 
 setupIonicReact();
-import { store } from "./store";
+import { persistor, store } from "./store";
 import { Provider } from "react-redux";
 import BottomTabs from "./components/BottomTabs";
 import MenuComponent from "./components/MenuComponent";
+import { PersistGate } from "redux-persist/es/integration/react";
 const App: React.FC = () => {
   return (
     <Provider store={store}>
-      <IonApp>
-        <BottomTabs />
-      </IonApp>
+      <PersistGate loading={<></>} persistor={persistor}>
+        <IonApp>
+          <BottomTabs />
+        </IonApp>
+      </PersistGate>
     </Provider>
   );
 };

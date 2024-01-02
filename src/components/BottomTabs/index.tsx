@@ -1,3 +1,5 @@
+/** @format */
+
 import {
   IonIcon,
   IonLabel,
@@ -8,7 +10,7 @@ import {
 } from "@ionic/react";
 import { IonReactRouter } from "@ionic/react-router";
 import { homeSharp, tvSharp, newspaperSharp, saveSharp } from "ionicons/icons";
-import React from "react";
+import React, { useEffect } from "react";
 import { Redirect, Route } from "react-router";
 import Header from "../Header";
 import MenuComp from "../Menu";
