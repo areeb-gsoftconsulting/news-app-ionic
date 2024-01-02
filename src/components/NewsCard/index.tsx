@@ -63,6 +63,7 @@ const NewsCard = ({
 
     dispatch(saveNewsResponse({ news: [news, ...saveNews] }));
   };
+
   return (
     <IonCard className={expand ? styles.cardsMobile : styles.cards}>
       <img
