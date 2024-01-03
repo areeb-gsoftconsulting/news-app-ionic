@@ -57,7 +57,7 @@ const NewsCard = ({
   };
 
   const saveNews = useSelector((state: reducerState) => state.user?.saveNews);
-  let isNewsSaved = saveNews.find((data) => data._id == news._id);
+  let isNewsSaved = saveNews?.find((data) => data?._id == news?._id);
   const saveTheNews = () => {
     let index = saveNews.findIndex((data) => data._id == news._id);
     if (index != -1) {
@@ -77,6 +77,11 @@ const NewsCard = ({
     dispatch(onNewsDtail([news]));
     history.push(`/detailnews/${id}`);
   };
+  console.log("loader", loader);
+
+  if (loader) {
+    return <NewsCardShimmar />;
+  }
   return (
     <IonCard className={expand ? styles.cardsMobile : styles.cards}>
       <img
@@ -183,3 +188,63 @@ const NewsCard = ({
 };
 
 export default NewsCard;
+
+const NewsCardShimmar = () => {
+  return (
+    <IonCard className={styles.cards}>
+      <div className={styles.imageShimmer}></div>
+      <div
+        style={{
+          display: "flex",
+          flexDirection: "column",
+          flexWrap: "wrap",
+        }}
+      >
+        <IonCardHeader>
+          <IonCardTitle className={styles.headerShimmer}></IonCardTitle>
+        </IonCardHeader>
+
+        <IonCardContent className={styles.shortSummaryShimmer}></IonCardContent>
+
+        {/* <IonButton className={styles.detailButton}>{"تفصیل دیکھیں"}</IonButton> */}
+        <IonRow
+          // class="ion-justify-content-between"
+          className={styles.cardFooter}
+        >
+          <IonRow
+            style={{
+              width: "100%",
+              display: "flex",
+              flexDirection: "row",
+              justifyContent: "left",
+              flexWrap: "nowrap",
+              marginTop: 80,
+            }}
+          >
+            <div
+              style={{
+                height: 20,
+                width: 20,
+                alignSelf: "center",
+                marginRight: "5px",
+                backgroundColor: "#DEE2E7",
+              }}
+            ></div>
+            <div className={styles.channelNameShimmer}></div>
+          </IonRow>
+          <div style={{ marginTop: 80 }}>
+            <div
+              style={{
+                height: 20,
+                width: 20,
+                alignSelf: "center",
+                marginRight: "5px",
+                backgroundColor: "#DEE2E7",
+              }}
+            ></div>
+          </div>
+        </IonRow>
+      </div>
+    </IonCard>
+  );
+};

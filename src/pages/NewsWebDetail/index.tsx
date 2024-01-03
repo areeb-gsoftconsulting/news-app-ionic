@@ -29,7 +29,6 @@ const NewsWebDetail: React.FC = () => {
   const handleIframeLoad = () => {
     // After the iframe has loaded, hide the loading spinner
     setLoading(false);
-    console.log("kkkkk");
   };
 
   return (
