@@ -24,12 +24,14 @@ import NewsDetailsModal from "../NewsDetails";
 import NotFoundPage from "../../pages/NotFoundPage/NotFoundPage";
 import DetailNews from "../../pages/DetailNews";
 import NewsWebDetail from "../../pages/NewsWebDetail";
+
 const BottomTabs: React.FC = () => {
   const data = useSelector((state: any) => state.app.newsDetails);
 
   return (
     <IonReactRouter>
       <MenuComponent />
+
       {data?.length > 0 && <NewsDetailsModal />}
 
       <IonTabs>

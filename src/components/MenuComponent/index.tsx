@@ -1,3 +1,5 @@
+/** @format */
+
 import {
   IonMenu,
   IonHeader,
@@ -20,9 +22,11 @@ import NavLogo from "../../images/PakistanUrduNewsLogoRound.png";
 import styles from "./menucomo.module.css";
 import { homeSharp, shareSocial, mailSharp } from "ionicons/icons";
 import { useHistory } from "react-router";
+import { useDeeplinking } from "../../hooks/useDeeplinking";
 
 const MenuComponent: React.FC = () => {
   const history = useHistory();
+  useDeeplinking();
   const toggleDarkModeHandler = () => document.body.classList.toggle("dark");
 
   return (
@@ -38,12 +42,10 @@ const MenuComponent: React.FC = () => {
             <IonTabButton tab="home" href="/home">
               <IonItem
                 onClick={() => history.push("/home")}
-                className={styles.list}
-              >
+                className={styles.list}>
                 <IonRow
                   style={{ width: "100%" }}
-                  class="ion-justify-content-between"
-                >
+                  class="ion-justify-content-between">
                   <IonLabel>Main Page</IonLabel>
                   <IonIcon icon={homeSharp}></IonIcon>
                 </IonRow>
@@ -55,8 +57,7 @@ const MenuComponent: React.FC = () => {
             <IonItem className={styles.list}>
               <IonRow
                 style={{ width: "100%" }}
-                class="ion-justify-content-between"
-              >
+                class="ion-justify-content-between">
                 <IonToggle>Notifications</IonToggle>
               </IonRow>
             </IonItem>
@@ -65,8 +66,7 @@ const MenuComponent: React.FC = () => {
             <IonItem className={styles.list}>
               <IonRow
                 style={{ width: "100%" }}
-                class="ion-justify-content-between"
-              >
+                class="ion-justify-content-between">
                 <IonToggle onIonChange={toggleDarkModeHandler}>
                   Dark Mode
                 </IonToggle>
@@ -77,8 +77,7 @@ const MenuComponent: React.FC = () => {
             <IonItem className={styles.list}>
               <IonRow
                 style={{ width: "100%" }}
-                class="ion-justify-content-between"
-              >
+                class="ion-justify-content-between">
                 <IonLabel>Share</IonLabel>
                 <IonIcon icon={shareSocial}></IonIcon>
               </IonRow>
@@ -88,8 +87,7 @@ const MenuComponent: React.FC = () => {
             <IonItem className={styles.list}>
               <IonRow
                 style={{ width: "100%" }}
-                class="ion-justify-content-between"
-              >
+                class="ion-justify-content-between">
                 <IonLabel>Contact Us</IonLabel>
                 <IonIcon icon={mailSharp}></IonIcon>
               </IonRow>

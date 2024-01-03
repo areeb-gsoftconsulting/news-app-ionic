@@ -1,4 +1,6 @@
-import React, { useState } from "react";
+/** @format */
+
+import React, { memo, useDeferredValue, useEffect, useState } from "react";
 AbortSignal;
 import HeaderWithoutTabs from "../../components/Header/Header";
 import {
@@ -25,16 +27,41 @@ import {
   logoTwitter,
 } from "ionicons/icons";
 import { useParams } from "react-router-dom";
+import getNewsDetail from "../../services/getNewsDetail";
+import { useToast } from "../../hooks/useToast";
 
 const DetailNews: React.FC = () => {
-  const data = useSelector((state: any) => state.app.onNewsDtail);
-  console.log("data", data);
+  const [data, setData] = useState(null);
+  const { presentToast } = useToast();
+
   const [imageError, setImageError] = useState(false);
   const { id } = useParams<{ id: string }>();
 
+  console.log("id", id);
   const handleImageError = () => {
     setImageError(true);
   };
+
+  const getNewsDetailsMethod = async () => {
+    try {
+      const response = await getNewsDetail("65955a1878127ba14144c273");
+      // console.log("response", response?.data);
+      if (response?.data) {
+        setData(response?.data);
+      } else {
+        console.log("error to call api");
+        presentToast(response?.error || "");
+      }
+    } catch (error) {
+      console.log({ error });
+    }
+  };
+  useEffect(() => {
+    if (id) {
+      getNewsDetailsMethod();
+    }
+  }, [id]);
+
   return (
     <IonPage id="main-content">
       <HeaderWithoutTabs />
@@ -59,31 +86,26 @@ const DetailNews: React.FC = () => {
           <IonImg
             style={{ height: 300 }}
             onError={handleImageError}
-            src={!imageError ? data[0]?.image : noImage}
+            src={!imageError ? data?.image : noImage}
           />
           <IonTitle
             style={{
               textAlign: "center",
               fontFamily: "urduFont",
-            }}
-          >
-            {data[0].title}
+            }}>
+            {data?.title}
           </IonTitle>
           <p
             style={{
               textAlign: "end",
               fontFamily: "urduFont",
-            }}
-          >
-            {data[0].summary}
+            }}>
+            {data?.summary}
           </p>
         </div>
       </IonContent>
-      {/* <IonContent>
-        <h1>23456789</h1>
-      </IonContent> */}
     </IonPage>
   );
 };
 
-export default DetailNews;
+export default memo(DetailNews);

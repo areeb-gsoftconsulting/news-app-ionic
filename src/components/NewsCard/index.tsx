@@ -1,3 +1,5 @@
+/** @format */
+
 import {
   IonAvatar,
   IonButton,
@@ -24,7 +26,6 @@ import {
 } from "ionicons/icons";
 import { useDispatch, useSelector } from "react-redux";
 import { reducerState } from "../../models/types";
-import moment from "moment";
 import styles from "./cards.module.css";
 import { onExpandNews, onNewsDtail } from "../../store/slice/appSlice";
 import { saveNewsResponse } from "../../store/slice/userSlice";
@@ -32,7 +33,8 @@ import { useToast } from "../../hooks/useToast";
 import noImage from "../../images/no-image.png";
 import { isPlatform } from "@ionic/react";
 import { useHistory } from "react-router-dom";
-import { enableLoading } from "../../store/slice/loadingSlice";
+import { Share } from "@capacitor/share";
+
 const NewsCard = ({
   news,
   loader,
@@ -73,9 +75,46 @@ const NewsCard = ({
     dispatch(saveNewsResponse({ news: [news, ...saveNews] }));
   };
 
-  const shareNews = () => {
-    dispatch(onNewsDtail([news]));
-    history.push(`/detailnews/${id}`);
+  const shareNews = async () => {
+    console.log("id", id);
+
+    // dispatch(onNewsDtail([news]));
+    // history.push(`/detailnews/${id}`);
+    // const deepLinkUrl2 = `https://urdunews.com/detailnews/${id}`; // Replace with your deep
+    // create share feature here...
+    try {
+      // Check if the platform is ready
+      const deepLinkUrl = "https://ionicframework.com/docs";
+      const deepLinkTitle = "See cool stuff";
+      const deepLinkMessage = "Really awesome thing you need to see right meow";
+
+      if (isPlatform("android")) {
+        await Share.share({
+          title: deepLinkTitle,
+          text: deepLinkMessage,
+          url: deepLinkUrl,
+          dialogTitle: "Share with buddies",
+        });
+      } else {
+        // if (navigator?.canShare && navigator?.canShare())
+        navigator
+          ?.share({
+            title: deepLinkTitle,
+            text: deepLinkMessage,
+            url: deepLinkUrl,
+          })
+          .then(function () {
+            console.log("Successful share");
+          })
+          .catch(function (error) {
+            // presentToast("Error sharing:" + error);
+            console.log("Error sharing:", error);
+          });
+      }
+    } catch (error) {
+      presentToast("Error while sharing");
+      console.log("error", error);
+    }
   };
   return (
     <IonCard className={expand ? styles.cardsMobile : styles.cards}>
@@ -98,8 +137,7 @@ const NewsCard = ({
           display: "flex",
           flexDirection: "column",
           flexWrap: "wrap",
-        }}
-      >
+        }}>
         <IonCardHeader>
           <IonCardTitle className={styles.header}>{title}</IonCardTitle>
         </IonCardHeader>
@@ -115,13 +153,11 @@ const NewsCard = ({
               paddingLeft: "5px",
               paddingRight: "5px",
               fontSize: "10px",
-            }}
-          >
+            }}>
             {news.summary}
             <button
               style={{ color: "green", backgroundColor: "white" }}
-              onClick={() => history.push("/newswebdetail", { id: link })}
-            >
+              onClick={() => history.push("/newswebdetail", { id: link })}>
               {"تفصیل دیکھیں"}
             </button>
           </p>
@@ -129,8 +165,7 @@ const NewsCard = ({
         {/* <IonButton className={styles.detailButton}>{"تفصیل دیکھیں"}</IonButton> */}
         <IonRow
           // class="ion-justify-content-between"
-          className={styles.cardFooter}
-        >
+          className={styles.cardFooter}>
           <IonRow
             style={{
               paddingBottom: 4,
@@ -148,8 +183,7 @@ const NewsCard = ({
                 width: 20,
                 alignSelf: "center",
                 marginRight: "5px",
-              }}
-            >
+              }}>
               <img alt="Silhouette of a person's head" src={channelLogo} />
             </IonAvatar>
             <p className={styles.channelName}>{channelName}</p>
