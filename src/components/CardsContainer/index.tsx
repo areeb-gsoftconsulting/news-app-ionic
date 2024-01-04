@@ -43,15 +43,16 @@ const CardsContainer = ({ news, loader }: any) => {
                 sizeLg="4"
                 sizeXl="3"
               >
-                <IonCard>
+                {/* <IonCard>
                   <div
                     style={{
                       height: 250,
                       backgroundColor:
-                        "var(--ion-card-background, var(--ion-item-background, var(--ion-background-color, #fff)))",
+                        "var(--ion-card-background, var(--ion-item-background, var(--ion-background-color, #DEE2E7)))",
                     }}
                   />
-                </IonCard>
+                </IonCard> */}
+                <NewsCard loader={loader} />
               </IonCol>
             );
           })
@@ -99,6 +100,7 @@ const CardsContainer = ({ news, loader }: any) => {
                   time={moment(data?.updatedAt).fromNow()}
                   channelName={channels[data?.source]?.name}
                   news={data}
+                  loader={loader}
                 />
               </IonCol>
             );

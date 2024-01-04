@@ -59,5 +59,34 @@
 .detailButton {
   height: "5%";
   width: "20%";
-  background-color: red;
+}
+.imageShimmer {
+  height: 130px;
+  width: 100%;
+  background-color: #dee2e7;
+}
+
+.headerShimmer {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  padding-bottom: 15px;
+  height: 20px;
+  text-align: end;
+  border-radius: 5px;
+
+  background-color: #dee2e7;
+}
+
+.shortSummaryShimmer {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  height: 20px;
+  background-color: #dee2e7;
+}
+.channelNameShimmer {
+  padding-left: 4px;
+  background-color: #dee2e7;
+  width: 14px;
 }
