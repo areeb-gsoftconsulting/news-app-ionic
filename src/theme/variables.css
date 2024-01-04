@@ -299,9 +299,3 @@ ion-segment-button {
     padding: var(--ion-grid-padding-xl); /* Padding for xl screens and up */
   }
 }
-
-ion-icon:hover {
-  cursor: grab;
-  background-color: var(--ion-icon-hover-bg);
-  border-radius: 50%;
-}

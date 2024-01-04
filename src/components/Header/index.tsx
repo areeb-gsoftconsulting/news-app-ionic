@@ -13,6 +13,7 @@ import {
   IonLabel,
   IonSegment,
   isPlatform,
+  IonButton,
 } from "@ionic/react";
 import styles from "./header.module.css";
 import { refreshSharp } from "ionicons/icons";
@@ -31,11 +32,10 @@ const Header: React.FC<ContainerProps> = () => {
     [];
   const dispatch = useDispatch();
   const selectedTab = useSelector((state: any) => state.app?.selectedTab);
-  console.log("selectedTab==>", selectedTab, tabs[0]?.key);
+  // console.log("selectedTab==>", selectedTab, tabs[0]?.key);
   const refreshing = useCallback(() => {
     dispatch(enableRefreshing());
   }, []);
-  console.log("hhhhhh", styles["ion-icon-refresh"]);
 
   return (
     <IonHeader>
@@ -50,9 +50,9 @@ const Header: React.FC<ContainerProps> = () => {
         </IonButtons>
         <IonImg className={styles.headerlogo} src={logo} />
         <IonButtons onClick={refreshing} slot="end">
-          <IonIcon
-            icon={refreshSharp}
-            className={styles["ion-icon-refresh"]}></IonIcon>
+          <IonButton>
+            <IonIcon icon={refreshSharp}></IonIcon>
+          </IonButton>
         </IonButtons>
       </IonToolbar>
       {/* /categories */}

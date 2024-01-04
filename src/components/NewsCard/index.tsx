@@ -34,6 +34,9 @@ import noImage from "../../images/no-image.png";
 import { isPlatform } from "@ionic/react";
 import { useHistory } from "react-router-dom";
 import { Share } from "@capacitor/share";
+import { shareNewsLink } from "../../hooks/useDeeplinking";
+import { RWebShare } from "react-web-share";
+import { ShareDialog } from "../ShareDialog";
 
 const NewsCard = ({
   news,
@@ -60,6 +63,7 @@ const NewsCard = ({
 
   const saveNews = useSelector((state: reducerState) => state.user?.saveNews);
   let isNewsSaved = saveNews.find((data) => data._id == news._id);
+
   const saveTheNews = () => {
     let index = saveNews.findIndex((data) => data._id == news._id);
     if (index != -1) {
@@ -87,8 +91,9 @@ const NewsCard = ({
       const deepLinkUrl = "https://ionicframework.com/docs";
       const deepLinkTitle = "See cool stuff";
       const deepLinkMessage = "Really awesome thing you need to see right meow";
+      // shareNewsLink(deepLinkTitle, deepLinkMessage, deepLinkUrl);
 
-      if (isPlatform("android")) {
+      if (isPlatform("android") || isPlatform("ios")) {
         await Share.share({
           title: deepLinkTitle,
           text: deepLinkMessage,
@@ -96,20 +101,23 @@ const NewsCard = ({
           dialogTitle: "Share with buddies",
         });
       } else {
-        // if (navigator?.canShare && navigator?.canShare())
-        navigator
-          ?.share({
-            title: deepLinkTitle,
-            text: deepLinkMessage,
-            url: deepLinkUrl,
-          })
-          .then(function () {
-            console.log("Successful share");
-          })
-          .catch(function (error) {
-            // presentToast("Error sharing:" + error);
-            console.log("Error sharing:", error);
-          });
+        if (navigator?.canShare && navigator?.canShare()) {
+          navigator
+            ?.share({
+              title: deepLinkTitle,
+              text: deepLinkMessage,
+              url: deepLinkUrl,
+            })
+            .then(function () {
+              console.log("Successful share");
+            })
+            .catch(function (error) {
+              // presentToast("Error sharing:" + error);
+              console.log("Error sharing:", error);
+            });
+        } else {
+          // code for web
+        }
       }
     } catch (error) {
       presentToast("Error while sharing");
@@ -142,10 +150,7 @@ const NewsCard = ({
           <IonCardTitle className={styles.header}>{title}</IonCardTitle>
         </IonCardHeader>
 
-        <IonCardContent className={styles.shortSummary}>
-          {shortSummary}
-        </IonCardContent>
-        {expand && (
+        {expand ? (
           <p
             style={{
               textAlign: "end",
@@ -161,6 +166,10 @@ const NewsCard = ({
               {"تفصیل دیکھیں"}
             </button>
           </p>
+        ) : (
+          <IonCardContent className={styles.shortSummary}>
+            {shortSummary}
+          </IonCardContent>
         )}
         {/* <IonButton className={styles.detailButton}>{"تفصیل دیکھیں"}</IonButton> */}
         <IonRow
@@ -189,15 +198,19 @@ const NewsCard = ({
             <p className={styles.channelName}>{channelName}</p>
             <p className={styles.channelName}>{time}</p>
           </IonRow>
-          <IonIcon
-            style={{
-              paddingBottom: 2,
-              marginRight: 10,
-            }}
-            onClick={shareNews}
-            // onClick={saveTheNews}
-            icon={shareSocialOutline}
-          />
+
+          <ShareDialog
+            message={title || shortSummary || ""}
+            url={id ? `http://localhost:8100/detailnews/${id}` : ""}
+            title={title || shortSummary || ""}>
+            <IonIcon
+              style={{
+                paddingBottom: 2,
+                marginRight: 10,
+              }}
+              icon={shareSocialOutline}
+            />
+          </ShareDialog>
 
           <IonRow
             style={{

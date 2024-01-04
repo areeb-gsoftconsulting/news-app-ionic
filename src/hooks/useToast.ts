@@ -9,7 +9,7 @@ export const useToast = () => {
   const presentToast = (msg: any) => {
     present({
       message: msg || "Something went wrong!",
-      duration: 50,
+      duration: 1000,
       position: "bottom",
     });
   };
