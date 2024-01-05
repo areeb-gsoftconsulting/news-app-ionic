@@ -22,6 +22,8 @@ export const ShareDialog = ({
   const { presentToast } = useToast();
 
   const shareNews = async () => {
+    console.log(" shareNews called");
+
     // dispatch(onNewsDtail([news]));
     // history.push(`/detailnews/${id}`);
     // const deepLinkUrl2 = `https://urdunews.com/detailnews/${id}`; // Replace with your deep

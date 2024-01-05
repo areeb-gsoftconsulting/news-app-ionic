@@ -1,3 +1,5 @@
+/** @format */
+
 import { IonPage, IonContent } from "@ionic/react";
 import "./NotFound.css";
 import HeaderWithoutTabs from "../../components/Header/Header";

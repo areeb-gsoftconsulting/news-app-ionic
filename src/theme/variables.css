@@ -265,9 +265,9 @@ ion-grid {
   color: green;
 }
 
-/* .segment-button-checked::part(native) {
+.ios .segment-button-checked::part(native) {
   color: white;
-} */
+}
 ion-segment-button {
   --indicator-color: green;
 }
