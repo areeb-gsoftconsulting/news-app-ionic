@@ -67,15 +67,16 @@ const NewsCard = ({
     return <NewsCardShimmar />;
   }
   return (
-    <IonCard className={expand ? styles.cardsMobile : styles.cards}>
+    <IonCard
+      onClick={() => {
+        if (isPlatform("mobile")) {
+          setExpand(!expand);
+        } else {
+          dispatch(onExpandNews([news]));
+        }
+      }}
+      className={expand ? styles.cardsMobile : styles.cards}>
       <img
-        onClick={() => {
-          if (isPlatform("mobile")) {
-            setExpand(!expand);
-          } else {
-            dispatch(onExpandNews([news]));
-          }
-        }}
         alt="Silhouette of mountains"
         className={styles.image}
         onError={handleImageError}
@@ -158,7 +159,10 @@ const NewsCard = ({
             className={`${styles.ionIcon} ${
               isPlatform("ios") ? styles.ionIosIconSave : ""
             }`}
-            onClick={saveTheNews}
+            onClick={(e) => {
+              saveTheNews();
+              e.stopPropagation();
+            }}
             icon={isNewsSaved ? saveSharp : saveOutline}
           />
         </IonRow>
