@@ -8,6 +8,10 @@
 /** Ionic CSS Variables **/
 :root {
   /** primary **/
+  --ion-color-dark: #f44336;
+  --ion-color-light: #ffeb3b;
+  --ion-background-color-dark: #121212;
+
   --ion-toolbar-background: #fff;
   --ion-grid-padding-xs: 0px 10px 0px 10px; /* Customize the padding value for xs screens */
   --ion-grid-padding-sm: 0px 10px 0px 10px; /* Customize the padding value for sm screens */
