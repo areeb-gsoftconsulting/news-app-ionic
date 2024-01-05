@@ -1,3 +1,5 @@
+/** @format */
+
 import { CapacitorConfig } from "@capacitor/cli";
 
 const config: CapacitorConfig = {
@@ -6,6 +8,11 @@ const config: CapacitorConfig = {
   webDir: "dist",
   server: {
     androidScheme: "http",
+  },
+  plugins: {
+    App: {
+      iosScheme: "ionicframework.com",
+    },
   },
 };
 

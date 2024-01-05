@@ -34,10 +34,31 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 
     func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey: Any] = [:]) -> Bool {
+        // Handle deep link when the app is already open
+        
+        if url.scheme == "ionicframework.com" {
+                // Handle deep link logic for 'myapp://page/detail'
+                // Extract and use path components as needed
+                return true
+            }
+            return false
+//        return self.handleDeepLink(url)
+
         // Called when the app was launched with a url. Feel free to add additional processing here,
         // but if you want the App API to support tracking app url opens, make sure to keep this call
-        return ApplicationDelegateProxy.shared.application(app, open: url, options: options)
+//        return ApplicationDelegateProxy.shared.application(app, open: url, options: options)
     }
+    
+    private func handleDeepLink(_ url: URL) -> Bool {
+            // Process the deep link URL here
+            // Extract necessary information from the URL and perform actions in the app
+            // For example:
+            // if url.scheme == "your_scheme" {
+            //     let pathComponents = url.pathComponents
+            //     // Extract and use path components as needed
+            // }
+            return true
+        }
 
     func application(_ application: UIApplication, continue userActivity: NSUserActivity, restorationHandler: @escaping ([UIUserActivityRestoring]?) -> Void) -> Bool {
         // Called when the app was launched with an activity, including Universal Links.
