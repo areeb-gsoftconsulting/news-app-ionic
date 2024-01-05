@@ -1,3 +1,5 @@
+/** @format */
+
 import {
   IonHeader,
   IonToolbar,
@@ -11,6 +13,7 @@ import {
   IonLabel,
   IonSegment,
   isPlatform,
+  IonButton,
 } from "@ionic/react";
 import styles from "./header.module.css";
 import { refreshSharp } from "ionicons/icons";
@@ -29,25 +32,27 @@ const Header: React.FC<ContainerProps> = () => {
     [];
   const dispatch = useDispatch();
   const selectedTab = useSelector((state: any) => state.app?.selectedTab);
-  console.log("selectedTab==>", selectedTab, tabs[0]?.key);
+  // console.log("selectedTab==>", selectedTab, tabs[0]?.key);
   const refreshing = useCallback(() => {
     dispatch(enableRefreshing());
   }, []);
+
   return (
     <IonHeader>
       <IonToolbar
         class={styles.toolbar}
         style={{
-          marginTop: isPlatform("ios") ? 20 : 0,
+          marginTop: isPlatform("ios") ? 28 : 0,
         }}
-        mode="md"
-      >
+        mode="md">
         <IonButtons slot="start">
           <IonMenuButton autoHide={false}></IonMenuButton>
         </IonButtons>
         <IonImg className={styles.headerlogo} src={logo} />
         <IonButtons onClick={refreshing} slot="end">
-          <IonIcon icon={refreshSharp}></IonIcon>
+          <IonButton>
+            <IonIcon icon={refreshSharp}></IonIcon>
+          </IonButton>
         </IonButtons>
       </IonToolbar>
       {/* /categories */}
@@ -57,8 +62,7 @@ const Header: React.FC<ContainerProps> = () => {
             <IonSegmentButton
               onClick={(e: any) => dispatch(onSelectTab(data.index))}
               key={index}
-              value={data.index}
-            >
+              value={data.index}>
               <IonLabel style={{ padding: "6px" }}>{data?.title}</IonLabel>
             </IonSegmentButton>
           ))}

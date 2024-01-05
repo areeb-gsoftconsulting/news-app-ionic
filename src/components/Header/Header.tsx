@@ -1,3 +1,5 @@
+/** @format */
+
 import {
   IonHeader,
   IonToolbar,
@@ -10,6 +12,7 @@ import {
   IonSegmentButton,
   IonLabel,
   IonSegment,
+  IonButton,
 } from "@ionic/react";
 import styles from "./header.module.css";
 import { refreshSharp } from "ionicons/icons";
@@ -28,14 +31,15 @@ const HeaderWithoutTabs: React.FC<ContainerProps> = () => {
         style={{
           marginTop: isPlatform("ios") ? 20 : 0,
         }}
-        mode="md"
-      >
+        mode="md">
         <IonButtons slot="start">
           <IonMenuButton autoHide={false}></IonMenuButton>
         </IonButtons>
         <IonImg className={styles.headerlogo} src={logo} />
-        <IonButtons slot="end">
-          <IonIcon icon={refreshSharp}></IonIcon>
+        <IonButtons className={styles["ion-icon-refresh"]} slot="end">
+          <IonButton>
+            <IonIcon icon={refreshSharp} />
+          </IonButton>
         </IonButtons>
       </IonToolbar>
     </IonHeader>

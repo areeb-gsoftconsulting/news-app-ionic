@@ -1,5 +1,9 @@
-/* Ionic Variables and Theming. For more info, please see:
-http://ionicframework.com/docs/theming/ */
+/**
+ * Ionic Variables and Theming. For more info, please see:
+ * http://ionicframework.com/docs/theming/
+ *
+ * @format
+ */
 
 /** Ionic CSS Variables **/
 :root {
@@ -85,6 +89,7 @@ http://ionicframework.com/docs/theming/ */
   --ion-color-light-contrast-rgb: 0, 0, 0;
   --ion-color-light-shade: #d7d8da;
   --ion-color-light-tint: #f5f6f9;
+  --ion-icon-hover-bg: #f8f8f8;
 }
 
 /*
@@ -93,6 +98,7 @@ http://ionicframework.com/docs/theming/ */
    */
 
 body.dark {
+  --ion-toolbar-background: #000000;
   --ion-color-primary: green;
   --ion-color-primary-rgb: 66, 140, 255;
   --ion-color-primary-contrast: #ffffff;
@@ -155,6 +161,7 @@ body.dark {
   --ion-color-light-contrast-rgb: 255, 255, 255;
   --ion-color-light-shade: #1e2023;
   --ion-color-light-tint: #383a3e;
+  --ion-icon-hover-bg: #282828;
 }
 
 /*
@@ -262,8 +269,8 @@ ion-grid {
   color: green;
 }
 
-.segment-button-checked::part(native) {
-  color: green;
+.ios .segment-button-checked::part(native) {
+  color: white;
 }
 ion-segment-button {
   --indicator-color: green;
@@ -279,6 +286,9 @@ ion-segment-button {
 @media (min-width: 768px) {
   ion-grid {
     padding: var(--ion-grid-padding-md); /* Padding for md screens and up */
+  }
+  .segment-button-checked::part(native) {
+    color: green;
   }
 }
 

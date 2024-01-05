@@ -1,3 +1,5 @@
+/** @format */
+
 import {
   IonAvatar,
   IonCard,
@@ -41,17 +43,8 @@ const CardsContainer = ({ news, loader }: any) => {
                 sizeSm="6"
                 sizeMd="4"
                 sizeLg="4"
-                sizeXl="3"
-              >
-                <IonCard>
-                  <div
-                    style={{
-                      height: 250,
-                      backgroundColor:
-                        "var(--ion-card-background, var(--ion-item-background, var(--ion-background-color, #fff)))",
-                    }}
-                  />
-                </IonCard>
+                sizeXl="3">
+                <NewsCard loader={loader} />
               </IonCol>
             );
           })
@@ -62,8 +55,7 @@ const CardsContainer = ({ news, loader }: any) => {
               display: "flex",
               alignItems: "center",
               justifyContent: "center",
-            }}
-          >
+            }}>
             <IonRow>
               <IonCol>
                 <IonText
@@ -71,8 +63,7 @@ const CardsContainer = ({ news, loader }: any) => {
                     fontSize: "24px",
                     fontWeight: "bold",
                     textAlign: "center",
-                  }}
-                >
+                  }}>
                   No News found
                 </IonText>
               </IonCol>
@@ -87,16 +78,18 @@ const CardsContainer = ({ news, loader }: any) => {
                 sizeSm="6"
                 sizeMd="4"
                 sizeLg="4"
-                sizeXl="3"
-              >
+                sizeXl="3">
                 <NewsCard
                   image={data.image}
-                  title={data.title}
+                  title={data?.title}
+                  id={data?._id}
+                  link={data?.link}
                   channelLogo={channels[data.source]?.image}
                   shortSummary={data.shortSummary}
                   time={moment(data?.updatedAt).fromNow()}
                   channelName={channels[data?.source]?.name}
                   news={data}
+                  loader={loader}
                 />
               </IonCol>
             );

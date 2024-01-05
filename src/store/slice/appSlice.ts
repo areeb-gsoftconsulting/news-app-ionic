@@ -17,6 +17,7 @@ const initialState: appState = {
   currentRoute: "Home",
   selectedTab: "TopNews",
   newsDetails: [],
+  onNewsDtail: [],
 };
 
 const AppState = createSlice({
@@ -86,6 +87,12 @@ const AppState = createSlice({
         newsDetails: action.payload,
       };
     },
+    onNewsDtail: (state: any, action) => {
+      return {
+        ...state,
+        onNewsDtail: action.payload,
+      };
+    },
   },
 });
 
@@ -100,5 +107,6 @@ export const {
   saveCurrentRoute,
   onSelectTab,
   onExpandNews,
+  onNewsDtail,
 } = AppState.actions;
 export default AppState.reducer;

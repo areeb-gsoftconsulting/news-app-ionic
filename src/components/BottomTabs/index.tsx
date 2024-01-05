@@ -1,3 +1,5 @@
+/** @format */
+
 import {
   IonIcon,
   IonLabel,
@@ -8,7 +10,7 @@ import {
 } from "@ionic/react";
 import { IonReactRouter } from "@ionic/react-router";
 import { homeSharp, tvSharp, newspaperSharp, saveSharp } from "ionicons/icons";
-import React from "react";
+import React, { useEffect } from "react";
 import { Redirect, Route } from "react-router";
 import Header from "../Header";
 import MenuComp from "../Menu";
@@ -20,6 +22,8 @@ import MenuComponent from "../MenuComponent";
 import { useSelector } from "react-redux";
 import NewsDetailsModal from "../NewsDetails";
 import NotFoundPage from "../../pages/NotFoundPage/NotFoundPage";
+import DetailNews from "../../pages/DetailNews";
+import NewsWebDetail from "../../pages/NewsWebDetail";
 
 const BottomTabs: React.FC = () => {
   const data = useSelector((state: any) => state.app.newsDetails);
@@ -27,6 +31,7 @@ const BottomTabs: React.FC = () => {
   return (
     <IonReactRouter>
       <MenuComponent />
+
       {data?.length > 0 && <NewsDetailsModal />}
 
       <IonTabs>
@@ -46,6 +51,9 @@ const BottomTabs: React.FC = () => {
           />
           <Route path="/newspapers/:id" render={() => <NewsPaperView />} />
           <Route path="/saved" render={() => <SavedNews />} exact={true} />
+          <Route path="/detailnews/:id" render={() => <DetailNews />} />
+          <Route path="/newswebdetail" render={() => <NewsWebDetail />} />
+
           <Route component={NotFoundPage} />
         </IonRouterOutlet>
 
