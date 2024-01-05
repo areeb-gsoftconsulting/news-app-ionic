@@ -265,9 +265,9 @@ ion-grid {
   color: green;
 }
 
-/* .segment-button-checked::part(native) {
+.ios .segment-button-checked::part(native) {
   color: white;
-} */
+}
 ion-segment-button {
   --indicator-color: green;
 }
@@ -298,10 +298,4 @@ ion-segment-button {
   ion-grid {
     padding: var(--ion-grid-padding-xl); /* Padding for xl screens and up */
   }
-}
-
-ion-icon:hover {
-  cursor: grab;
-  background-color: var(--ion-icon-hover-bg);
-  border-radius: 50%;
 }

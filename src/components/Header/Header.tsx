@@ -12,6 +12,7 @@ import {
   IonSegmentButton,
   IonLabel,
   IonSegment,
+  IonButton,
 } from "@ionic/react";
 import styles from "./header.module.css";
 import { refreshSharp } from "ionicons/icons";
@@ -36,7 +37,9 @@ const HeaderWithoutTabs: React.FC<ContainerProps> = () => {
         </IonButtons>
         <IonImg className={styles.headerlogo} src={logo} />
         <IonButtons className={styles["ion-icon-refresh"]} slot="end">
-          <IonIcon icon={refreshSharp} />
+          <IonButton>
+            <IonIcon icon={refreshSharp} />
+          </IonButton>
         </IonButtons>
       </IonToolbar>
     </IonHeader>

@@ -1,38 +1,27 @@
+/** @format */
+
 import {
   IonAvatar,
-  IonButton,
   IonCard,
   IonCardContent,
   IonCardHeader,
-  IonCardSubtitle,
   IonCardTitle,
-  IonChip,
-  IonCol,
-  IonContent,
-  IonGrid,
   IonIcon,
-  IonLabel,
   IonRow,
-  IonTitle,
 } from "@ionic/react";
-import React, { useCallback, useEffect, useState } from "react";
-import {
-  saveSharp,
-  saveOutline,
-  shareOutline,
-  shareSocialOutline,
-} from "ionicons/icons";
+import { useState } from "react";
+import { saveSharp, saveOutline, shareSocialOutline } from "ionicons/icons";
 import { useDispatch, useSelector } from "react-redux";
 import { reducerState } from "../../models/types";
-import moment from "moment";
 import styles from "./cards.module.css";
-import { onExpandNews, onNewsDtail } from "../../store/slice/appSlice";
+import { onExpandNews } from "../../store/slice/appSlice";
 import { saveNewsResponse } from "../../store/slice/userSlice";
 import { useToast } from "../../hooks/useToast";
 import noImage from "../../images/no-image.png";
 import { isPlatform } from "@ionic/react";
 import { useHistory } from "react-router-dom";
-import { enableLoading } from "../../store/slice/loadingSlice";
+import { ShareDialog } from "../ShareDialog";
+
 const NewsCard = ({
   news,
   loader,
@@ -42,7 +31,6 @@ const NewsCard = ({
   shortSummary,
   time,
   id,
-  //   isNewsSaved,
   channelName,
   link,
 }: any) => {
@@ -57,12 +45,13 @@ const NewsCard = ({
   };
 
   const saveNews = useSelector((state: reducerState) => state.user?.saveNews);
-  let isNewsSaved = saveNews.find((data) => data._id == news._id);
+  let isNewsSaved = saveNews.find((item) => item?._id == news?._id);
+
   const saveTheNews = () => {
-    let index = saveNews.findIndex((data) => data._id == news._id);
+    let index = saveNews.findIndex((item) => item?._id == news?._id);
     if (index != -1) {
-      let data = saveNews.filter((data) => data._id != news._id);
-      console.log({ data });
+      let data = saveNews.filter((item) => item?._id != news?._id);
+      // console.log({ data });
       presentToast("News unsaved");
       dispatch(saveNewsResponse({ news: data }));
 
@@ -73,10 +62,10 @@ const NewsCard = ({
     dispatch(saveNewsResponse({ news: [news, ...saveNews] }));
   };
 
-  const shareNews = () => {
-    dispatch(onNewsDtail([news]));
-    history.push(`/detailnews/${id}`);
-  };
+  // if (true) {
+  if (loader) {
+    return <NewsCardShimmar />;
+  }
   return (
     <IonCard className={expand ? styles.cardsMobile : styles.cards}>
       <img
@@ -98,16 +87,12 @@ const NewsCard = ({
           display: "flex",
           flexDirection: "column",
           flexWrap: "wrap",
-        }}
-      >
+        }}>
         <IonCardHeader>
           <IonCardTitle className={styles.header}>{title}</IonCardTitle>
         </IonCardHeader>
 
-        <IonCardContent className={styles.shortSummary}>
-          {shortSummary}
-        </IonCardContent>
-        {expand && (
+        {expand ? (
           <p
             style={{
               textAlign: "end",
@@ -115,22 +100,23 @@ const NewsCard = ({
               paddingLeft: "5px",
               paddingRight: "5px",
               fontSize: "10px",
-            }}
-          >
-            {news.summary}
+            }}>
+            {news?.summary}
             <button
               style={{ color: "green", backgroundColor: "white" }}
-              onClick={() => history.push("/newswebdetail", { id: link })}
-            >
+              onClick={() => history.push("/newswebdetail", { id: link })}>
               {"تفصیل دیکھیں"}
             </button>
           </p>
+        ) : (
+          <IonCardContent className={styles.shortSummary}>
+            {shortSummary}
+          </IonCardContent>
         )}
         {/* <IonButton className={styles.detailButton}>{"تفصیل دیکھیں"}</IonButton> */}
         <IonRow
           // class="ion-justify-content-between"
-          className={styles.cardFooter}
-        >
+          className={styles.cardFooter}>
           <IonRow
             style={{
               paddingBottom: 4,
@@ -148,34 +134,33 @@ const NewsCard = ({
                 width: 20,
                 alignSelf: "center",
                 marginRight: "5px",
-              }}
-            >
+              }}>
               <img alt="Silhouette of a person's head" src={channelLogo} />
             </IonAvatar>
             <p className={styles.channelName}>{channelName}</p>
             <p className={styles.channelName}>{time}</p>
           </IonRow>
-          <IonIcon
-            style={{
-              paddingBottom: 2,
-              marginRight: 10,
-            }}
-            onClick={shareNews}
-            // onClick={saveTheNews}
-            icon={shareSocialOutline}
-          />
 
-          <IonRow
-            style={{
-              paddingBottom: 2,
-            }}
-            // class="ion-align-items-center ion-padding"
-          >
+          <ShareDialog
+            message={title || shortSummary || ""}
+            url={id ? `http://localhost:8100/detailnews/${id}` : ""}
+            title={title || shortSummary || ""}>
             <IonIcon
-              onClick={saveTheNews}
-              icon={isNewsSaved ? saveSharp : saveOutline}
+              className={styles.ionIcon}
+              style={{
+                marginRight: 10,
+              }}
+              icon={shareSocialOutline}
             />
-          </IonRow>
+          </ShareDialog>
+
+          <IonIcon
+            className={`${styles.ionIcon} ${
+              isPlatform("ios") ? styles.ionIosIconSave : ""
+            }`}
+            onClick={saveTheNews}
+            icon={isNewsSaved ? saveSharp : saveOutline}
+          />
         </IonRow>
       </div>
     </IonCard>
@@ -183,3 +168,38 @@ const NewsCard = ({
 };
 
 export default NewsCard;
+
+const NewsCardShimmar = () => {
+  return (
+    <IonCard className={styles.cards}>
+      <div className={`${styles.image} ${styles.imageShimmer}`}></div>
+      <div
+        style={{
+          display: "flex",
+          flexDirection: "column",
+          height: "55%",
+          justifyContent: "space-around",
+        }}>
+        <IonCardTitle className={styles.headerTitleShimmer} />
+
+        <IonCardTitle
+          className={`${styles.headerTitleShimmer} ${styles.shortSummaryShimmer}`}
+        />
+
+        <IonRow className={styles.cardFooterShimmer}>
+          <IonRow>
+            <div className={styles.channelIconShimmer} />
+            <div className={styles.channelNameShimmer} />
+          </IonRow>
+          <IonRow>
+            <div
+              className={styles.channelIconShimmer}
+              style={{ marginRight: 5 }}
+            />
+            <div className={styles.channelIconShimmer} />
+          </IonRow>
+        </IonRow>
+      </div>
+    </IonCard>
+  );
+};
